@@ -1,0 +1,16 @@
+Hi, <%= @user.first_name %>
+===============================================
+
+      A maintenance request has been created for the following property:
+      <%= @maintenance_request.property.street_1 %>
+      Details about the request can be found below:
+      Title: <%= @maintenance_request.title %>
+
+        Category: <%= @maintenance_request.category %>
+        Description: <%= @maintenance_request.description %>
+        Created At: <%= @maintenance_request.created_at %>
+
+
+      To view details of the request, just follow this link: <%= @url %>.
+
+    Thanks for joining and have a great day!

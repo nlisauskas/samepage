@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hi, <%= @user.first_name %></h1>
+    <p>
+      A maintenance request has been created for the following property:
+      <%= @maintenance_request.property.street_1 %>
+      Details about the request can be found below:</p>
+      <h2>Title: <%= @maintenance_request.title %></h2>
+      <ul>
+        <li>Category: <%= @maintenance_request.category %></li>
+        <li>Description: <%= @maintenance_request.description %></li>
+        <li>Created At: <%= @maintenance_request.created_at %></li>
+      </ul>
+    <p>
+      To view details of the request, just follow this link: <%= @url %>.
+    </p>
+    <p>Thanks for joining and have a great day!</p>
+  </body>
+</html>

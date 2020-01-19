@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <h6>Name:</h6>
+  <%= @user.first_name %> <%= @user.last_name %>
+</p>
+
+<p>
+  <h6>Gender:</h6>
+  <%= @user.gender %>
+</p>
+
+<p>
+  <h6>Birthdate:</h6>
+  <%= @user.birthdate %>
+</p>
+
+<p>
+  <h6>Email:</h6>
+  <%= @user.email %>
+</p>
+
+<p>
+  <h6>Properties:</h6>
+  <% if current_user %>
+  <% current_user.properties.each do |property| %>
+  <strong>Address: <%= property.street_1 %><br></strong>
+  <%= property.street_2 %><br>
+  <strong>City: <%= property.city %><br></strong>
+  <strong>State: <%= property.state %><br></strong>
+  <strong>Zipcode: <%= property.zipcode %><br></strong>
+  <br></br>
+  <% end %>
+  <% end %>
+  <%= link_to 'Add', new_user_property_path(@user) %>
+</p>
+
+<p>
+  <h6>Tenants:</h6>
+  <% if current_user %>
+  <% current_user.tenants.each do |tenant| %>
+  First Name: <%= tenant.first_name %><br>
+  Last Name: <%= tenant.last_name %><br>
+  Email: <%= tenant.email %><br>
+  Lives At: <%= tenant.property.street_1 %><br>
+  <%= link_to 'Edit Tenant', edit_user_tenant_path(current_user, tenant) %><br>
+  <% end %>
+  <%= link_to 'Add New Tenant', new_user_tenant_path(@user) %><br>
+  <% end %>
+</p>
+
+<%= link_to 'Edit Profile', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

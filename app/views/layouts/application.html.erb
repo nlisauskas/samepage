@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Samepage</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div class="container">  <!-- newly added code -->
+      <nav>
+        <div class="nav-wrapper blue-grey darken-1">
+          <a href="/" class="brand-logo center">SamePage</a>
+          <ul id="nav-mobile" class="left hide-on-med-and-down">
+          </ul>
+        </div>
+      </nav>
+    <% if current_user %>
+      Logged in as <%= current_user.email %>. <%= link_to 'Log Out', logout_path %><br></br>
+      <%= link_to 'Profile', user_path(current_user) %>
+      <%= link_to 'Properties', properties_path %>
+      <%= link_to 'Tenants', tenants_path %>
+      <%= link_to 'Maintenance Requests', maintenance_requests_path %>
+    <% else %>
+      <%= link_to 'Sign Up', signup_path %> or
+      <%= link_to 'Log In', login_path %>
+    <% end %>
+    <%= yield %>
+    </div>
+  </body>
+</html>

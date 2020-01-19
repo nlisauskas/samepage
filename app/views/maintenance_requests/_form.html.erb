@@ -1,0 +1,42 @@
+<%= form_with(model: maintenance_request, local: true) do |form| %>
+  <% if maintenance_request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(maintenance_request.errors.count, "error") %> prohibited this maintenance_request from being saved:</h2>
+
+      <ul>
+      <% maintenance_request.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Category %>
+    <%= form.select :category, ['Landscaping', 'Plumbing', 'HVAC', 'Electricity', 'Locks / Security', 'Floors', 'Windows', 'Common Areas', 'Pests', 'Miscellaneous']%>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :resolved %>
+    <%= form.select :resolved, [true, false]%>
+  </div>
+
+  <div class="field">
+    <%= form.label :property %>
+    <%= select_tag "maintenance_request[property_id]", options_from_collection_for_select(current_user.properties, "id", "street_1") %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

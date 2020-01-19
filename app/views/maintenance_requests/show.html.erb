@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @maintenance_request.category %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @maintenance_request.description %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @maintenance_request.title %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <% if @maintenance_request.resolved %>
+  <p>Resolved</p>
+  <% else %>
+  <p>Unresolved</p>
+  <% end %>
+</p>
+
+<p>
+  <strong>Property:</strong>
+  <%= link_to @maintenance_request.property.street_1, property_path(@maintenance_request.property) %>
+</p>
+
+<%= link_to 'Edit', edit_maintenance_request_path(@maintenance_request) %> |
+<%= link_to 'Back', maintenance_requests_path %>
