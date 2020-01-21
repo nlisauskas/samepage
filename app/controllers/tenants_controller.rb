@@ -5,7 +5,11 @@ class TenantsController < ApplicationController
   # GET /tenants
   # GET /tenants.json
   def index
+    if params[:property_id]
+    @tenants = Property.find_by_id(params[:property_id]).tenants
+  else
     @tenants = current_user.tenants
+  end
   end
 
   # GET /tenants/1

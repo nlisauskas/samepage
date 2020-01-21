@@ -1,5 +1,5 @@
 class MaintenanceRequestsController < ApplicationController
-  before_action :set_maintenance_request, only: [:show, :edit, :update, :destroy]
+  before_action :set_maintenance_request, only: [:show, :edit, :update, :destroy, :resolve]
   require 'pry'
   # GET /maintenance_requests
   # GET /maintenance_requests.json
@@ -37,6 +37,19 @@ class MaintenanceRequestsController < ApplicationController
         format.html { render :new }
         format.json { render json: @maintenance_request.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def resolve
+    @maintenance_request
+    if @maintenance_request.resolved?
+      @maintenance_request.update_attribute(:resolved, false)
+    else
+      @maintenance_request.update_attribute(:resolved, true)
+    end
+    respond_to do |format|
+        format.html { redirect_to @maintenance_request, notice: 'Maintenance request was successfully updated.' }
+        format.json { render :show, status: :ok, location: @maintenance_request }
     end
   end
 

@@ -26,7 +26,7 @@
         <td><%= maintenance_request.property.street_1 %></td>
         <td><%= link_to 'View Details', maintenance_request %></td>
         <td><%= link_to 'Edit', edit_maintenance_request_path(maintenance_request) %></td>
-        <td><%= link_to 'Delete Request', maintenance_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= button_to 'Resolve Request', resolve_maintenance_request_path(maintenance_request), method: :put, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
