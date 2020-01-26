@@ -1,5 +1,4 @@
 class UserMailer < ApplicationMailer
-  require 'pry'
   default from: 'nick.lisauskas@gmail.com'
 
  def welcome_email

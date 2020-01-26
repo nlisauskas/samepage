@@ -29,5 +29,12 @@
   <%= link_to @maintenance_request.property.street_1, property_path(@maintenance_request.property) %>
 </p>
 
+<strong>Contractors:</strong><br></br>
+<% @yelp.each do | yelp | %>
+<strong>Name: <%= yelp["name"] %><br></strong>
+Rating:<%= yelp["rating"] %> rating with <%= yelp["review_count"] %> reviews on Yelp.<br>
+Phone:<%= yelp["display_phone"] %><br></br>
+<% end %>
+
 <%= link_to 'Edit', edit_maintenance_request_path(@maintenance_request) %> |
 <%= link_to 'Back', maintenance_requests_path %>

@@ -10,6 +10,7 @@ class MaintenanceRequestsController < ApplicationController
   # GET /maintenance_requests/1
   # GET /maintenance_requests/1.json
   def show
+    @yelp = YelpApiAdapter.search(@maintenance_request.category,@maintenance_request.property.zipcode)
   end
 
   # GET /maintenance_requests/new
