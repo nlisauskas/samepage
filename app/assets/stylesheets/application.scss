@@ -79,7 +79,7 @@
 /* The hero image */
 .jumbotron {
   /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('hero_image.jpg');
+  // background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('hero_image.jpg');
   /* Set a specific height */
   min-height: 600px;
 
