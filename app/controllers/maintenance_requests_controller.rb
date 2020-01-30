@@ -27,6 +27,7 @@ class MaintenanceRequestsController < ApplicationController
   def create
     @maintenance_request = MaintenanceRequest.new(maintenance_request_params)
     @maintenance_request.user = current_user
+    @maintenance_request.resolved = false
     respond_to do |format|
       if @maintenance_request.save
         UserMailer.with(user: @user, maintenance_request: @maintenance_request).maintenance_notification.deliver_now
@@ -49,7 +50,7 @@ class MaintenanceRequestsController < ApplicationController
       @maintenance_request.update_attribute(:resolved, true)
     end
     respond_to do |format|
-        format.html { redirect_to @maintenance_request, notice: 'Maintenance request was successfully updated.' }
+        format.html { redirect_to maintenance_requests_url, notice: 'Maintenance request was successfully updated.' }
         format.json { render :show, status: :ok, location: @maintenance_request }
     end
   end

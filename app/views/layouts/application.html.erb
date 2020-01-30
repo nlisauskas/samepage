@@ -26,8 +26,8 @@
               <li><%= link_to 'Maintenance Requests', maintenance_requests_path %></li>
               <li><%= link_to 'Log Out', logout_path %></li>
             <% else %>
-              <%= link_to 'Sign Up', signup_path %> or
-              <%= link_to 'Log In', login_path %>
+              <%= link_to 'Get started', signup_path, class: "btn btn-default signup" %>
+              <%= link_to 'Log In', login_path, class: "btn btn-default" %>
             <% end %>
           </ul>
         </div>

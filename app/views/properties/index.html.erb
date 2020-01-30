@@ -14,8 +14,8 @@
       <strong>City: </strong><p><%= property.city %></p>
       <strong>State: </strong><p><%= property.state %></p>
       <strong>Zip Code: </strong><p><%= property.zipcode %></p>
-      <strong>Purchase Date: </strong><p><%= property.purchase_date %></p>
-      <strong>Purchase Price: </strong><p><%= property.purchase_price %></p>
+      <strong>Purchase Date: </strong><p><%= property.purchase_date.strftime("%F") %></p>
+      <strong>Purchase Price: </strong><p><%= number_to_currency(property.purchase_price, precision: 0) %></p>
       <p><%= link_to 'View Details', property %></p>
       <p><%= link_to 'Edit', edit_property_path(property) %></p>
       <p><%= link_to 'Delete Property', property, method: :delete, data: { confirm: 'Are you sure?' } %></p>

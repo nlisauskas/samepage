@@ -27,12 +27,12 @@
 
 <p>
   <strong>Purchase date:</strong>
-  <%= @property.purchase_date %>
+  <%= @property.purchase_date.strftime("%F") %>
 </p>
 
 <p>
   <strong>Purchase price:</strong>
-  <%= @property.purchase_price %>
+  <%= number_to_currency(@property.purchase_price, precision: 0) %>
 </p>
 
 <%= link_to 'Edit', edit_property_path(@property) %> |
