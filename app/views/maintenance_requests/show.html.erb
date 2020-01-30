@@ -1,5 +1,9 @@
 <p id="notice"><%= notice %></p>
-
+<div class="title-container">
+  <h1>Request ID: <%= @maintenance_request.id %></h1>
+  <%= link_to 'Edit Request', edit_maintenance_request_path(@maintenance_request), class: "btn btn-default" %><br></br>
+  <%= link_to 'Back to All Requests', maintenance_requests_path, class: "btn btn-default" %>
+</div>
 <p>
   <strong>Category:</strong>
   <%= @maintenance_request.category %>
@@ -18,9 +22,9 @@
 <p>
   <strong>Status:</strong>
   <% if @maintenance_request.resolved %>
-  <p>Resolved</p>
+  Resolved
   <% else %>
-  <p>Unresolved</p>
+  Unresolved
   <% end %>
 </p>
 
@@ -29,12 +33,17 @@
   <%= link_to @maintenance_request.property.street_1, property_path(@maintenance_request.property) %>
 </p>
 
-<strong>Contractors:</strong><br></br>
-<% @yelp.each do | yelp | %>
-<strong>Name: <%= yelp["name"] %><br></strong>
-Rating:<%= yelp["rating"] %> rating with <%= yelp["review_count"] %> reviews on Yelp.<br>
-Phone:<%= yelp["display_phone"] %><br></br>
-<% end %>
-
-<%= link_to 'Edit', edit_maintenance_request_path(@maintenance_request) %> |
-<%= link_to 'Back', maintenance_requests_path %>
+<strong>Potential Contractors for the Job:</strong><br></br>
+<div class="contractors">
+  <% @yelp.each do | yelp | %>
+  <div class="contractor">
+    <div class="thumbnail">
+    <div class="caption">
+  <strong>Name: <%= yelp["name"] %><br></strong>
+  Rating: <%= yelp["rating"] %> rating with <%= yelp["review_count"] %> reviews on Yelp.<br>
+  Phone: <%= yelp["display_phone"] %><br></br>
+  </div>
+  </div>
+  </div>
+  <% end %>
+</div>

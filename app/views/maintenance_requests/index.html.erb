@@ -1,67 +1,52 @@
 <p id="notice"><%= notice %></p>
-
+<div class="title-container">
 <h1>Maintenance Requests</h1>
+<%= link_to "New Request", new_maintenance_request_path, class: "btn btn-default" %>
+</div>
+
 
 <h4>Open Requests</h4>
-<table>
-  <thead>
-    <tr>
-      <th>Created At:</th>
-      <th>Category</th>
-      <th>Description</th>
-      <th>Title</th>
-      <th>Property</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="requests">
+  <% @maintenance_requests.each do |maintenance_request, resolved| %>
+    <% next unless maintenance_request.resolved == false %>
+<div class="request">
+  <div class="thumbnail">
+  <div class="caption">
+    <strong>Created At: </strong><p><%= maintenance_request.created_at %></p>
+    <strong>Category: </strong><p><%= maintenance_request.category %></p>
+    <strong>Title: </strong><p><%= maintenance_request.title %></p>
+    <strong>Description: </strong><p><%= maintenance_request.description %></p>
+    <strong>Property: </strong><p><%= maintenance_request.property.street_1 %></p>
+    <p><%= link_to 'View Details', maintenance_request %></p>
+    <p><%= link_to 'Edit', edit_maintenance_request_path(maintenance_request) %></p>
+    <p><%= button_to 'Resolve Request', resolve_maintenance_request_path(maintenance_request), method: :put, data: { confirm: 'Are you sure?' }, class: "btn btn-default" %></p>
 
-  <tbody>
-    <% @maintenance_requests.each do |maintenance_request, resolved| %>
-      <% next unless maintenance_request.resolved == false %>
-      <tr>
-        <td><%= maintenance_request.created_at %></td>
-        <td><%= maintenance_request.category %></td>
-        <td><%= maintenance_request.description %></td>
-        <td><%= maintenance_request.title %></td>
-        <td><%= maintenance_request.property.street_1 %></td>
-        <td><%= link_to 'View Details', maintenance_request %></td>
-        <td><%= link_to 'Edit', edit_maintenance_request_path(maintenance_request) %></td>
-        <td><%= button_to 'Resolve Request', resolve_maintenance_request_path(maintenance_request), method: :put, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% end %>
+</div>
+</div>
+</div>
+
+</div>
 
 <h4>Resolved Requests</h4>
-<table>
-  <thead>
-    <tr>
-      <th>Created At:</th>
-      <th>Category</th>
-      <th>Description</th>
-      <th>Title</th>
-      <th>Property</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @maintenance_requests.each do |maintenance_request| %>
+<div class="requests">
+  <% @maintenance_requests.each do |maintenance_request, resolved| %>
     <% next unless maintenance_request.resolved == true %>
-      <tr>
-        <td><%= maintenance_request.created_at %></td>
-        <td><%= maintenance_request.category %></td>
-        <td><%= maintenance_request.description %></td>
-        <td><%= maintenance_request.title %></td>
-        <td><%= maintenance_request.property.street_1 %></td>
-        <td><%= link_to 'View Details', maintenance_request %></td>
-        <td><%= link_to 'Edit', edit_maintenance_request_path(maintenance_request) %></td>
-        <td><%= link_to 'Delete Request', maintenance_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="request">
+  <div class="thumbnail">
+  <div class="caption">
+    <strong>Created At: </strong><p><%= maintenance_request.created_at %></p>
+    <strong>Category: </strong><p><%= maintenance_request.category %></p>
+    <strong>Title: </strong><p><%= maintenance_request.title %></p>
+    <strong>Description: </strong><p><%= maintenance_request.description %></p>
+    <strong>Property: </strong><p><%= maintenance_request.property.street_1 %></p>
+    <p><%= link_to 'View Details', maintenance_request %></p>
+    <p><%= link_to 'Edit', edit_maintenance_request_path(maintenance_request) %></p>
 
-<br>
+<% end %>
+</div>
+</div>
+</div>
 
-<%= link_to 'New Maintenance Request', new_maintenance_request_path %>
+</div>

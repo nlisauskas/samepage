@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>Samepage</title>
     <%= csrf_meta_tags %>
@@ -8,28 +8,39 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link href="http://fonts.googleapis.com/css?family=Questrial" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width-device-width, initial-scale=1" >
   </head>
 
   <body>
-    <div class="container">  <!-- newly added code -->
-      <nav>
-        <div class="nav-wrapper blue-grey darken-1">
-          <a href="/" class="brand-logo center">SamePage</a>
-          <ul id="nav-mobile" class="left hide-on-med-and-down">
+    <header class="container">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <%= link_to "SamePage", root_path, class: "navbar-brand" %>
+          </div>
+          <ul class="nav navbar-nav navbar-right">
+            <% if current_user %>
+              <li><%= link_to 'Profile', user_path(current_user) %></li>
+              <li><%= link_to 'Properties', properties_path %></li>
+              <li><%= link_to 'Tenants', tenants_path %></li>
+              <li><%= link_to 'Maintenance Requests', maintenance_requests_path %></li>
+              <li><%= link_to 'Log Out', logout_path %></li>
+            <% else %>
+              <%= link_to 'Sign Up', signup_path %> or
+              <%= link_to 'Log In', login_path %>
+            <% end %>
           </ul>
         </div>
       </nav>
-    <% if current_user %>
-      Logged in as <%= current_user.email %>. <%= link_to 'Log Out', logout_path %><br></br>
-      <%= link_to 'Profile', user_path(current_user) %>
-      <%= link_to 'Properties', properties_path %>
-      <%= link_to 'Tenants', tenants_path %>
-      <%= link_to 'Maintenance Requests', maintenance_requests_path %>
-    <% else %>
-      <%= link_to 'Sign Up', signup_path %> or
-      <%= link_to 'Log In', login_path %>
-    <% end %>
+    </header>
+
+    <section class="container">
+      <div id="flash">
+        <% flash.each do |key,value| %>
+          <div class="flash alert <%= alert_class(key)%>" ><%= value %> </div>
+          <% end %>
+      </div>
     <%= yield %>
-    </div>
+    </section>
   </body>
 </html>

@@ -13,41 +13,41 @@
 
   <div class="field">
     <%= form.label :street_1 %>
-    <%= form.text_field :street_1 %>
+    <%= form.text_field :street_1, class: "form-control"%>
   </div>
 
   <div class="field">
     <%= form.label :street_2 %>
-    <%= form.text_field :street_2 %>
+    <%= form.text_field :street_2, class: "form-control"%>
   </div>
 
   <div class="field">
     <%= form.label :city %>
-    <%= form.text_field :city %>
+    <%= form.text_field :city, class: "form-control"%>
   </div>
 
   <div class="field">
     <%= form.label :state %>
-    <%= form.text_field :state %>
+    <%= form.text_field :state, class: "form-control"%>
   </div>
 
   <div class="field">
     <%= form.label :zipcode %>
-    <%= form.number_field :zipcode %>
+    <%= form.number_field :zipcode, class: "form-control"%>
   </div>
 
   <div class="field">
     <%= form.label :purchase_date %>
-    <%= form.date_field :purchase_date %>
+    <%= form.date_field :purchase_date, class: "form-control"%>
   </div>
 
 
   <div class="field">
     <%= form.label :purchase_price %>
-    <%= form.text_field :purchase_price %>
+    <%= form.text_field :purchase_price, class: "form-control"%>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-primary"%>
   </div>
 <% end %>

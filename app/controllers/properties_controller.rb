@@ -14,7 +14,6 @@ class PropertiesController < ApplicationController
 
   # GET /properties/new
   def new
-    binding.pry
     @property = Property.new
   end
 
@@ -68,7 +67,6 @@ class PropertiesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_property
       @property = Property.find(params[:id])
-      binding.pry
       if @property[:user_id] == current_user.id
         @property
       else

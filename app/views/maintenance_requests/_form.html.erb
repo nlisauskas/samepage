@@ -13,30 +13,30 @@
 
   <div class="field">
     <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, class: "form-control"%>
   </div>
 
   <div class="field">
     <%= form.label :Category %>
-    <%= form.select :category, ['Landscaping', 'Plumbing', 'HVAC', 'Electricity', 'Locks / Security', 'Floors', 'Windows', 'Common Areas', 'Pests', 'Miscellaneous']%>
+    <%= form.select :category, ['Landscaping', 'Plumbing', 'HVAC', 'Electricity', 'Locks / Security', 'Floors', 'Windows', 'Pests', 'Miscellaneous'], class: "form-control"%>
   </div>
 
   <div class="field">
     <%= form.label :description %>
-    <%= form.text_area :description %>
+    <%= form.text_area :description, class: "form-control"%>
   </div>
 
   <div class="field">
     <%= form.label :resolved %>
-    <%= form.select :resolved, [true, false]%>
+    <%= form.select :resolved, [true, false], class: "form-control"%>
   </div>
 
   <div class="field">
     <%= form.label :property %>
-    <%= select_tag "maintenance_request[property_id]", options_from_collection_for_select(current_user.properties, "id", "street_1") %>
+    <%= select_tag "maintenance_request[property_id]", options_from_collection_for_select(current_user.properties, "id", "street_1"), class: "form-control"%>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-primary"%>
   </div>
 <% end %>

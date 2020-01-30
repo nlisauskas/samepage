@@ -1,4 +1,8 @@
 <p id="notice"><%= notice %></p>
+<div class="title-container">
+  <h1>Your Profile</h1>
+  <%= link_to "Edit Profile", edit_user_path(@user), class: "btn btn-default" %>
+</div>
 
 <p>
   <strong>Name:</strong>
@@ -20,32 +24,6 @@
   <%= @user.email %>
 </p>
 
-<p>
-  <strong>Properties:</strong><br>
-  <% if current_user %>
-  <% current_user.properties.each do |property| %>
-  <strong>Address: </strong><%= property.street_1 %> <%= property.street_2 %><br>
-  <strong>City: </strong><%= property.city %><br>
-  <strong>State: </strong><%= property.state %><br>
-  <strong>Zipcode: </strong><%= property.zipcode %><br></br>
-  <% end %>
-  <% end %>
-  <%= link_to 'Add', new_user_property_path(@user) %>
-</p>
-
-<p>
-  <strong>Tenants:</strong><br>
-  <% if current_user %>
-  <% current_user.tenants.each do |tenant| %>
-  First Name: <%= tenant.first_name %><br>
-  Last Name: <%= tenant.last_name %><br>
-  Email: <%= tenant.email %><br>
-  Lives At: <%= tenant.property.street_1 %><br>
-  <%= link_to 'Edit Tenant', edit_user_tenant_path(current_user, tenant) %><br></br>
-  <% end %>
-  <%= link_to 'Add New Tenant', new_user_tenant_path(@user) %><br>
-  <% end %>
-</p>
-
-<%= link_to 'Edit Profile', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= link_to 'View Properties', properties_path %><br>
+<%= link_to 'View Tenants', tenants_path %><br>
+<%= link_to 'View Maintenance Requests', maintenance_requests_path %><br>
