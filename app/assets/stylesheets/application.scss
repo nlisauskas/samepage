@@ -9,7 +9,12 @@
 
     h1 {
       margin: 0;
+      color: #004279;
     }
+}
+
+.body {
+  color: #004279;
 }
 
 .properties {
@@ -54,4 +59,13 @@
 .contractor {
   width: 30%;
   min-width: 300px;
+}
+
+.form-control {
+  max-width: 300px;
+}
+
+.btn {
+  background-color: #004279;
+  color: white;
 }

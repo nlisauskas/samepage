@@ -1,15 +1,18 @@
 <p id='alert'><%= alert %></p>
-<h1>Login</h1>
+<div class="title-container">
+<h1>Welcome back! Log in below.</h1>
+</div>
+
 <%= form_tag sessions_path do |form| %>
   <div class='field'>
     <%= label_tag :email %>
-    <%= text_field_tag :email %>
-  </div>
+    <%= text_field_tag :email, nil, class: "form-control"%>
+  </div><br>
   <div class='field'>
     <%= label_tag :password %>
-    <%= password_field_tag :password %>
-  </div>
+    <%= password_field_tag :password, nil, class: "form-control"%>
+  </div><br>
   <div class='actions'>
-    <%= submit_tag 'Login' %>
+    <%= submit_tag 'Login', class: "btn btn-primary"%>
   </div>
 <% end %>

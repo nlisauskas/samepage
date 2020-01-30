@@ -12,11 +12,11 @@
   </head>
 
   <body>
-    <header class="container">
+    <header>
       <nav class="navbar navbar-default">
         <div class="container-fluid">
           <div class="navbar-header">
-            <%= link_to "SamePage", root_path, class: "navbar-brand" %>
+            <%= link_to image_tag("transparentsamepage.png", :size => '135x90'), root_path %>
           </div>
           <ul class="nav navbar-nav navbar-right">
             <% if current_user %>
@@ -35,11 +35,6 @@
     </header>
 
     <section class="container">
-      <div id="flash">
-        <% flash.each do |key,value| %>
-          <div class="flash alert <%= alert_class(key)%>" ><%= value %> </div>
-          <% end %>
-      </div>
     <%= yield %>
     </section>
   </body>
