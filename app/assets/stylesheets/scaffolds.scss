@@ -1,23 +1,15 @@
 body {
   background-color: #fff;
-  color: #546E7A;
+  color: #333;
   margin: 33px;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Questrial', Georgia, Times, serif;
-}
-p, div {
-    font-family: 'Questrial', Helvetica, Arial, sans-serif;
-}
-
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
-  color: #546E7A;
   line-height: 18px;
 }
 
@@ -78,7 +70,7 @@ div {
     font-size: 12px;
     margin: -7px -7px 0;
     background-color: #c00;
-    color: #546E7A;
+    color: #fff;
   }
 
   ul li {

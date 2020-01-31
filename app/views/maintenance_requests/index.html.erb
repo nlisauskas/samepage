@@ -1,3 +1,5 @@
+<% if current_user %>
+
 <p id="notice"><%= notice %></p>
 <div class="title-container">
 <h1>Maintenance Requests</h1>
@@ -47,3 +49,67 @@
 </div>
 <% end %>
 </div>
+<% elsif current_contractor %>
+
+<p id="notice"><%= notice %></p>
+<div class="title-container">
+<h1>Maintenance Requests</h1>
+</div>
+
+
+<h4>Open Requests</h4>
+<div class="requests">
+  <% @maintenance_requests.each do |maintenance_request, resolved| %>
+    <% next unless maintenance_request.resolved == false %>
+<div class="request">
+  <div class="thumbnail">
+  <div class="caption">
+    <strong>Created At: </strong><p><%= maintenance_request.created_at.strftime("%F %H:%M") %></p>
+    <strong>Category: </strong><p><%= maintenance_request.category %></p>
+    <strong>Title: </strong><p><%= maintenance_request.title %></p>
+    <strong>Description: </strong><p><%= maintenance_request.description %></p>
+    <p><%= button_to 'Bid on Job', "#", class: "btn btn-default" %></p>
+  </div>
+  </div>
+  </div>
+  <% end %>
+  </div>
+
+<h4>Your Active Jobs</h4>
+
+<div class="requests">
+  <% @maintenance_requests.each do |maintenance_request, resolved| %>
+    <% next unless maintenance_request[:contractor_id] == current_contractor.id %>
+<div class="request">
+  <div class="thumbnail">
+  <div class="caption">
+    <strong>Created At: </strong><p><%= maintenance_request.created_at.strftime("%F %H:%M") %></p>
+    <strong>Category: </strong><p><%= maintenance_request.category %></p>
+    <strong>Title: </strong><p><%= maintenance_request.title %></p>
+    <strong>Description: </strong><p><%= maintenance_request.description %></p>
+    <strong>Property: </strong><p><%= maintenance_request.property.street_1 %></p>
+</div>
+</div>
+</div>
+<% end %>
+</div>
+
+<h4>Your Completed Jobs</h4>
+
+<div class="requests">
+  <% @maintenance_requests.each do |maintenance_request, resolved| %>
+    <% next unless maintenance_request[:contractor_id] == current_contractor.id && maintenance_request.resolved == true  %>
+<div class="request">
+  <div class="thumbnail">
+  <div class="caption">
+    <strong>Created At: </strong><p><%= maintenance_request.created_at.strftime("%F %H:%M") %></p>
+    <strong>Category: </strong><p><%= maintenance_request.category %></p>
+    <strong>Title: </strong><p><%= maintenance_request.title %></p>
+    <strong>Description: </strong><p><%= maintenance_request.description %></p>
+</div>
+</div>
+</div>
+<% end %>
+</div>
+
+<% end %>

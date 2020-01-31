@@ -4,7 +4,11 @@ class MaintenanceRequestsController < ApplicationController
   # GET /maintenance_requests
   # GET /maintenance_requests.json
   def index
+    if current_user
     @maintenance_requests = current_user.maintenance_requests
+  elsif current_contractor
+    @maintenance_requests = MaintenanceRequest.all
+  end
   end
 
   # GET /maintenance_requests/1
@@ -92,6 +96,6 @@ class MaintenanceRequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def maintenance_request_params
-      params.require(:maintenance_request).permit(:category, :description, :title, :property_id, :tenant_id, :user_id, :resolved)
+      params.require(:maintenance_request).permit(:category, :description, :title, :property_id, :tenant_id, :user_id, :contractor_id, :resolved)
     end
 end

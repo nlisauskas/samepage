@@ -12,6 +12,10 @@
     <%= label_tag :password %>
     <%= password_field_tag :password, nil, class: "form-control"%>
   </div><br>
+  <div class="field">
+    <%= label_tag :Category %><br>
+    <%= select_tag :category,  options_for_select(["Landlord", "Contractor"], "Landlord"), class: "form-control"%>
+  </div><br>
   <div class='actions'>
     <%= submit_tag 'Login', class: "btn btn-primary"%>
   </div>
