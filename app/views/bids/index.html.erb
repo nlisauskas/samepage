@@ -1,0 +1,91 @@
+<% if current_contractor %>
+
+<p id="notice"><%= notice %></p>
+<div class="title-container">
+<h1>Bids</h1>
+</div>
+
+
+<h4>Open Bids</h4>
+<div class="bids">
+  <% @bids.each do |bid, approved| %>
+<% next unless bid.approved == false %>
+<div class="bid">
+  <div class="thumbnail">
+  <div class="caption">
+    <strong>Created At: </strong><p><%= bid.created_at.strftime("%F %H:%M") %></p>
+    <strong>Price: </strong><p><%= number_to_currency(bid.price) %></p>
+    <strong>Payout: </strong><p><%= number_to_currency(bid.payout) %></p>
+    <strong>Availability: </strong><p><%= bid.availability %></p>
+    <strong>Notes: </strong><p><%= bid.notes %></p>
+  </div>
+  </div>
+  </div>
+  <% end %>
+  </div>
+
+<h4>Bids Awarded</h4>
+
+<div class="Bids">
+  <% @bids.each do |bid, approved| %>
+<% next unless bid.approved == true %>
+<div class="Bid">
+  <div class="thumbnail">
+  <div class="caption">
+    <strong>Created At: </strong><p><%= bid.created_at.strftime("%F %H:%M") %></p>
+    <strong>Price: </strong><p><%= bid.price %></p>
+    <strong>Payout: </strong><p><%= bid.payout %></p>
+    <strong>Availability: </strong><p><%= bid.availability %></p>
+    <strong>Notes: </strong><p><%= bid.notes %></p>
+</div>
+</div>
+</div>
+<% end %>
+
+</div>
+
+<% elsif current_user %>
+
+<p id="notice"><%= notice %></p>
+<div class="title-container">
+<h1>Bids</h1>
+</div>
+
+
+<h4>Bids You've Received</h4>
+<div class="bids">
+  <% @bids.each do |bid, approved| %>
+<% next unless bid.approved == false %>
+<div class="bid">
+  <div class="thumbnail">
+  <div class="caption">
+    <strong>Created At: </strong><p><%= bid.created_at.strftime("%F %H:%M") %></p>
+    <strong>Price: </strong><p><%= number_to_currency(bid.price) %></p>
+    <strong>Payout: </strong><p><%= number_to_currency(bid.payout) %></p>
+    <strong>Availability: </strong><p><%= bid.availability %></p>
+    <strong>Notes: </strong><p><%= bid.notes %></p>
+  </div>
+  </div>
+  </div>
+  <% end %>
+  </div>
+
+<h4>Bids You've Awarded</h4>
+
+<div class="Bids">
+  <% @bids.each do |bid, approved| %>
+<% next unless bid.approved == true %>
+<div class="Bid">
+  <div class="thumbnail">
+  <div class="caption">
+    <strong>Created At: </strong><p><%= bid.created_at.strftime("%F %H:%M") %></p>
+    <strong>Price: </strong><p><%= bid.price %></p>
+    <strong>Payout: </strong><p><%= bid.payout %></p>
+    <strong>Availability: </strong><p><%= bid.availability %></p>
+    <strong>Notes: </strong><p><%= bid.notes %></p>
+</div>
+</div>
+</div>
+<% end %>
+
+<% end %>

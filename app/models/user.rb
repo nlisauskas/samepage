@@ -4,4 +4,5 @@ class User < ApplicationRecord
   has_many :tenants
   has_many :maintenance_requests
   has_many :contractors, through: :maintenance_requests
+  has_many :bids, through: :maintenance_requests
 end

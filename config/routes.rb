@@ -1,15 +1,20 @@
 Rails.application.routes.draw do
+  resources :bids
   resources :contractors do
+    resources :bids
     resources :maintenance_requests
   end
   get 'event/stripe_callback'
   get 'event/payment_profile'
+
   resources :maintenance_requests do
+    resources :bids
     member do
       patch :resolve
       put :resolve
     end
   end
+
   get 'welcome/index'
   root 'home#index'
   get "settings/payment-info/users/auth/stripe_connect/callback", to:"users#stripe_callback"
@@ -19,6 +24,7 @@ Rails.application.routes.draw do
   end
   resources :tenants
   resources :users do
+      resources :bids
       resources :properties
       resources :tenants
     end

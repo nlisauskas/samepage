@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  price: 9.99
+  payout: 9.99
+  availability: MyString
+  notes: MyString
+  maintenance_request_id: 1
+  contractor_id: 1
+  approved: false
+
+two:
+  price: 9.99
+  payout: 9.99
+  availability: MyString
+  notes: MyString
+  maintenance_request_id: 1
+  contractor_id: 1
+  approved: false

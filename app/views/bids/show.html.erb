@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Price:</strong>
+  <%= number_to_currency(@bid.price) %>
+</p>
+
+<p>
+  <strong>Your Potential Payout:</strong>
+  <%= number_to_currency(@bid.payout) %>
+</p>
+
+<p>
+  <strong>Your Availability:</strong>
+  <%= @bid.availability %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @bid.notes %>
+</p>
+
+<p>
+  <strong>Maintenance request:</strong>
+  <%= @bid.maintenance_request_id %>
+</p>
+
+<p>
+  <strong>Job Awarded?</strong>
+  <% if @bid.approved %>
+  Yes!
+  <% else %>
+  No
+  <% end %>
+</p>
+
+<%= link_to 'Back', bids_path %>

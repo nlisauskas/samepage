@@ -48,7 +48,9 @@
 </div>
 </div>
 <% end %>
+
 </div>
+
 <% elsif current_contractor %>
 
 <p id="notice"><%= notice %></p>
@@ -68,7 +70,7 @@
     <strong>Category: </strong><p><%= maintenance_request.category %></p>
     <strong>Title: </strong><p><%= maintenance_request.title %></p>
     <strong>Description: </strong><p><%= maintenance_request.description %></p>
-    <p><%= button_to 'Bid on Job', "#", class: "btn btn-default" %></p>
+    <p><%= link_to 'Bid on Job', new_maintenance_request_bid_path(maintenance_request.id), class: "btn btn-default" %></p>
   </div>
   </div>
   </div>

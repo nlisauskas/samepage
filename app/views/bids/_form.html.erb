@@ -1,0 +1,36 @@
+<%= form_with(model: bid, local: true) do |form| %>
+  <% if bid.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(bid.errors.count, "error") %> prohibited this bid from being saved:</h2>
+
+      <ul>
+      <% bid.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label "Your Bid ($)" %>
+    <%= form.number_field :price, in: 1.00..20000.00, required: true, class: "form-control"%>
+  </div>
+
+  <em>Note: Your payout will be 90% of your bid price.</em><br></br>
+
+  <div class="field">
+    <%= form.label "When is your soonest availability?" %>
+    <%= form.text_field :availability, required: true, class: "form-control"%>
+  </div>
+
+  <div class="field">
+    <%= form.label "Other Notes" %>
+    <%= form.text_field :notes, class: "form-control"%>
+  </div><br>
+
+  <%= form.hidden_field :maintenance_request, value: @maintenance_request.id %>
+
+  <div class="actions">
+    <%= form.submit class: "btn btn-primary"%>
+  </div><br>
+<% end %>

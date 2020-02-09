@@ -50,6 +50,17 @@
   min-width: 300px;
 }
 
+.bids {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.bid {
+  width: 30%;
+  min-width: 300px;
+}
+
 .contractors {
   display: flex;
   flex-wrap: wrap;
