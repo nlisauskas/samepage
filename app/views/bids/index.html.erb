@@ -6,18 +6,20 @@
 </div>
 
 
-<h4>Open Bids</h4>
+<h4>Bids You've Opened</h4>
 <div class="bids">
   <% @bids.each do |bid, approved| %>
 <% next unless bid.approved == false %>
 <div class="bid">
   <div class="thumbnail">
   <div class="caption">
-    <strong>Created At: </strong><p><%= bid.created_at.strftime("%F %H:%M") %></p>
-    <strong>Price: </strong><p><%= number_to_currency(bid.price) %></p>
-    <strong>Payout: </strong><p><%= number_to_currency(bid.payout) %></p>
+    <strong>Bid Name: </strong><p><%= bid.maintenance_request.title %></p>
+    <strong>Bid Amount: </strong><p><%= number_to_currency(bid.price) %></p>
+    <strong>Potential Payout: </strong><p><%= number_to_currency(bid.payout) %></p>
     <strong>Availability: </strong><p><%= bid.availability %></p>
     <strong>Notes: </strong><p><%= bid.notes %></p>
+    <strong>Request Description: </strong><p><%= bid.maintenance_request.description %></p>
+    <strong>Request Zip Code: </strong><p><%= bid.maintenance_request.property.zipcode %></p>
   </div>
   </div>
   </div>
@@ -26,23 +28,27 @@
 
 <h4>Bids Awarded</h4>
 
-<div class="Bids">
+<div class="bids">
   <% @bids.each do |bid, approved| %>
 <% next unless bid.approved == true %>
-<div class="Bid">
+<div class="bid">
   <div class="thumbnail">
   <div class="caption">
-    <strong>Created At: </strong><p><%= bid.created_at.strftime("%F %H:%M") %></p>
-    <strong>Price: </strong><p><%= bid.price %></p>
-    <strong>Payout: </strong><p><%= bid.payout %></p>
-    <strong>Availability: </strong><p><%= bid.availability %></p>
+    <strong>SamePage will connect with you shortly to coordinate scheduling and payment for this job.</strong><br></br>
+    <strong>Bid Amount: </strong><p><%= number_to_currency(bid.price) %></p>
+    <strong>Your Payout: </strong><p><%= number_to_currency(bid.payout) %></p>
+    <strong>Your Stated Availability: </strong><p><%= bid.availability %></p>
     <strong>Notes: </strong><p><%= bid.notes %></p>
+    <strong>Request Title: </strong><p><%= bid.maintenance_request.title %></p>
+    <strong>Request Description: </strong><p><%= bid.maintenance_request.description %></p>
+    <strong>Request Zip Code: </strong><p><%= bid.maintenance_request.property.zipcode %></p>
 </div>
 </div>
 </div>
 <% end %>
-
 </div>
+
+
 
 <% elsif current_user %>
 
@@ -59,11 +65,15 @@
 <div class="bid">
   <div class="thumbnail">
   <div class="caption">
-    <strong>Created At: </strong><p><%= bid.created_at.strftime("%F %H:%M") %></p>
-    <strong>Price: </strong><p><%= number_to_currency(bid.price) %></p>
-    <strong>Payout: </strong><p><%= number_to_currency(bid.payout) %></p>
-    <strong>Availability: </strong><p><%= bid.availability %></p>
-    <strong>Notes: </strong><p><%= bid.notes %></p>
+    <strong>Request: <%= link_to bid.maintenance_request.title, maintenance_request_path(bid.maintenance_request) %></strong><br></br>
+    <strong>Request Created At: </strong><p><%= bid.created_at.strftime("%F %H:%M") %></p>
+    <strong>Cost of Job: </strong><p><%= number_to_currency(bid.price) %></p>
+    <strong>Contractor's Availability: </strong><p><%= bid.availability %></p>
+    <strong>Other Notes: </strong><p><%= bid.notes %></p>
+    <h4>Contractor Information: </h4>
+    <strong>Company: </strong><p><%= bid.contractor.company %></p>
+    <strong>Contractor's Name: </strong><p><%= bid.contractor.first_name %></p>
+    <p><%= button_to 'Award Bid', bid_award_path(bid), method: :put, data: { confirm: 'Are you sure?' }, class: "btn btn-default" %></p>
   </div>
   </div>
   </div>
@@ -72,17 +82,21 @@
 
 <h4>Bids You've Awarded</h4>
 
-<div class="Bids">
+<div class="bids">
   <% @bids.each do |bid, approved| %>
 <% next unless bid.approved == true %>
-<div class="Bid">
+<div class="bid">
   <div class="thumbnail">
   <div class="caption">
-    <strong>Created At: </strong><p><%= bid.created_at.strftime("%F %H:%M") %></p>
-    <strong>Price: </strong><p><%= bid.price %></p>
-    <strong>Payout: </strong><p><%= bid.payout %></p>
-    <strong>Availability: </strong><p><%= bid.availability %></p>
-    <strong>Notes: </strong><p><%= bid.notes %></p>
+    <strong>Request: <%= link_to bid.maintenance_request.title, maintenance_request_path(bid.maintenance_request) %></strong><br></br>
+    <strong>Request Created At: </strong><p><%= bid.created_at.strftime("%F %H:%M") %></p>
+    <strong>Cost of Job: </strong><p><%= number_to_currency(bid.price) %></p>
+    <strong>Contractor's Availability: </strong><p><%= bid.availability %></p>
+    <strong>Other Notes: </strong><p><%= bid.notes %></p>
+    <h4>Contractor Information: </h4>
+    <strong>Company: </strong><p><%= bid.contractor.company %></p>
+    <strong>Contractor's Name: </strong><p><%= bid.contractor.first_name %></p>
+
 </div>
 </div>
 </div>

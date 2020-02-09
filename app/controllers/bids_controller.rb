@@ -45,6 +45,19 @@ class BidsController < ApplicationController
     end
   end
 
+  def award
+    @bid = Bid.find_by_id(params[:bid_id])
+    if @bid.approved?
+      @bid.update_attribute(:approved, false)
+    else
+      @bid.update_attribute(:approved, true)
+    end
+    respond_to do |format|
+        format.html { redirect_to bids_url, notice: 'Bid was successfully approved.' }
+        format.json { render :show, status: :ok, location: @bid }
+    end
+  end
+
   # PATCH/PUT /bids/1
   # PATCH/PUT /bids/1.json
   def update

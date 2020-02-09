@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :bids
+  resources :bids do
+    patch :award
+    put :award
+  end
   resources :contractors do
     resources :bids
     resources :maintenance_requests
