@@ -28,8 +28,7 @@
               <li><%= link_to 'Log Out', logout_path %></li>
             <% elsif current_contractor %>
               <li><%= link_to 'Profile', contractor_path(current_contractor) %></li>
-              <li><%= link_to 'Maintenance Requests', maintenance_requests_path %></li>
-              <li><%= link_to 'Current Bids', bids_path %></li>
+              <li><%= link_to 'Jobs Portal', maintenance_requests_path %></li>
               <li><%= link_to 'Log Out', logout_path %></li>
             <% else %>
               <%= link_to 'Get started', signup_path, class: "btn btn-default signup" %>

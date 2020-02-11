@@ -1,3 +1,4 @@
+<% if current_user %>
 <p id="notice"><%= notice %></p>
 <div class="title-container">
   <h1>Request ID: <%= @maintenance_request.id %></h1>
@@ -47,3 +48,44 @@
   </div>
   <% end %>
 </div>
+
+
+
+
+<% elsif current_contractor %>
+
+<p id="notice"><%= notice %></p>
+<div class="title-container">
+  <h1>Request ID: <%= @maintenance_request.id %></h1>
+  <%= link_to 'Mark Request Complete', resolve_maintenance_request_path(@maintenance_request), method: :put, data: { confirm: 'Are you sure?' }, class: "btn btn-default" %>
+</div>
+<p>
+  <strong>Category:</strong>
+  <%= @maintenance_request.category %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @maintenance_request.description %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @maintenance_request.title %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <% if @maintenance_request.resolved %>
+  Resolved
+  <% else %>
+  Unresolved
+  <% end %>
+</p>
+
+<p>
+  <strong>Property Location:</strong>
+  <%= @maintenance_request.property.street_1 %> <%= @maintenance_request.property.street_2 %>, <%= @maintenance_request.property.city %>, <%= @maintenance_request.property.state %>, <%= @maintenance_request.property.zipcode %>
+</p>
+
+<% end %>

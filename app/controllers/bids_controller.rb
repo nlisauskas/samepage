@@ -51,6 +51,8 @@ class BidsController < ApplicationController
       @bid.update_attribute(:approved, false)
     else
       @bid.update_attribute(:approved, true)
+      @bid.maintenance_request.contractor_id = @bid.contractor_id
+      @bid.maintenance_request.save
     end
     respond_to do |format|
         format.html { redirect_to bids_url, notice: 'Bid was successfully approved.' }

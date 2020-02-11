@@ -87,7 +87,9 @@ class MaintenanceRequestsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_maintenance_request
       @maintenance_request = MaintenanceRequest.find(params[:id])
-      if @maintenance_request[:user_id] == current_user.id
+      if current_user && @maintenance_request[:user_id] == current_user.id
+        @maintenance_request
+      elsif current_contractor.id && @maintenance_request[:contractor_id] == current_contractor.id
         @maintenance_request
       else
         redirect_to user_path(current_user), notice: 'You can only view your own maintenance requests.'
