@@ -18,6 +18,7 @@ class UserMailer < ApplicationMailer
    @maintenance_request = params[:maintenance_request]
    @url  = 'https://samepagerealestate.herokuapp.com/maintenance_requests'
    mail(to: @user.email,
-     bcc: contractors, subject: 'New Maintenance Request Created')
+     # bcc: contractors, 
+     subject: 'New Maintenance Request Created')
  end
 end

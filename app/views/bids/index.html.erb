@@ -61,7 +61,7 @@
 <h4>Bids You've Received</h4>
 <div class="bids">
   <% @bids.each do |bid, approved| %>
-<% next unless bid.approved == false %>
+<% next unless bid.approved == false && bid.maintenance_request.contractor_id == nil %> 
 <div class="bid">
   <div class="thumbnail">
   <div class="caption">

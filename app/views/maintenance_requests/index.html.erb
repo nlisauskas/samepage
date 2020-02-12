@@ -62,7 +62,7 @@
 <h4>Requests Open for Bid</h4>
 <div class="requests">
   <% @maintenance_requests.each do |maintenance_request, resolved| %>
-    <% next unless maintenance_request.resolved == false && maintenance_request.bid_ids.any?{|x| current_contractor.bid_ids.include?(x)} == false %>
+    <% next unless maintenance_request.resolved == false && maintenance_request.bid_ids.any?{|x| current_contractor.bid_ids.include?(x)} == false && maintenance_request.contractor_id == nil %>
 <div class="request">
   <div class="thumbnail">
   <div class="caption">
