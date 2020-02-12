@@ -1,11 +1,36 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+contractor_list = [ ['Moritz','Welt','Landscaping Maintenance by Moritz Welt','Landscaper','moritz.welt@gmail.com','12345678','12345678','(773) 297-5671',],
+['John','Smith','JR Landscaping Service','Landscaper','nfo@jrlandscapingservice.com','12345678','12345678','(773) 342-4009',],
+['John','Smith','The Landscaper Guy','Landscaper','thelandscaperguy1@yahoo.com','12345678','12345678','(773) 991-0523',],
+['John','Smith','Power Plumbing & Sewer Contractor','Plumber','power@powerplumbinginc.com','12345678','12345678','773-248-9574',],
+['John','Smith','Vanguard Plumbing & Sewer','Plumber','vanguardplumbing@gmail.com','12345678','12345678','(773) 985-8636',],
+['John','Smith','Apex Plumbing Chicago','Plumber','office@apexplumbingchicago.com','12345678','12345678','773-477-7714',],
+['John','Smith','Giant HVAC','HVAC','frank@gianthvac.com','12345678','12345678','(773) 539-9629',],
+['John','Smith','Patrick Mechanical Inc','HVAC','info@patrickmechanicalinc.com','12345678','12345678','1-773-283-6161',],
+['John','Smith','Miron HVAC','HVAC','service@mironhvac.com','12345678','12345678','8474835125',],
+['John','Smith','T&D Electrical','Electrician','office.tdelectrical@gmail.com','12345678','12345678','(773) 481-9225',],
+['Neville','White','Blacklite Electric','Electrician','Neville@blackliteelectric.com','12345678','12345678','312-399-3223',],
+['John','Smith','Addison Electrical Services','Electrician','services@addisonelectricalservices.com','12345678','12345678','872-215-5595',],
+['John','Smith','ChiTown Locksmith','Locksmith','info@chitownlocksmith.com','12345678','12345678','(773) 552-2100',],
+['John','Smith','R.O.N Locksmith','Locksmith','info@locksmith-illinois.com','12345678','12345678','773-828-5249',],
+['John','Smith','Security Shop Inc','Locksmith','tom@securityshopinc.com','12345678','12345678','773-249-2023',],
+['John','Smith','Rovins Flooring','Flooring Specialist','contact@rovinsflooring.com','12345678','12345678','(773)-704-1550',],
+['John','Smith','Yonan Carpet One','Flooring Specialist','customerservice@yonancarpetone.com','12345678','12345678','773.889.7500',],
+['John','Smith','Floorecki','Flooring Specialist','Floorecki@gmail.com','12345678','12345678','773-790-3887',],
+['John','Smith','Apex Window Werx','Window Expert','sales@apexwindowwerks.com','12345678','12345678','(847) 557-9600',],
+['John','Smith','M and J Window Repair','Window Expert','service@mandjwindowrepair.com','12345678','12345678','708-381-0820',],
+['John','Smith','Lakeview Glass Inc','Window Expert','lakeviewglass@gmail.com','12345678','12345678','773-871-7170',],
+['John','Smith','Pest Control Experts Chicago','Pest Control','service@pestcontrolexpertschicago.com','12345678','12345678','773-789-9789',],
+['John','Smith','Resolve Pest Solutions','Pest Control','info@resolvepestsolutions.com','12345678','12345678','773-756-1404',],
+['John','Smith','Fox Pest Control','Pest Control','chicago@fox-pest.com','12345678','12345678','(331) 304-0085',],
+['John','Smith','BJ Construction Group','General Contractor','info@bjconstructiongroup.com','12345678','12345678','(312) 523-4757',],
+['Paul','Smith','Ultra Builds','General Contractor','ultrabuildsinc@gmail.com','12345678','12345678','7736683838',],
+['John','Smith','Irpino Construction','General Contractor','d@irpinogroup.com','12345678','12345678','773-525-7345',],
+['John','Smith','McMaster Painting and Decorating','Painter','info@mcmasterpainting.com','12345678','12345678','(773) 268-2050',],
+['Andy','Smith','Windy Painters','Painter','andy@windypainters.com','12345678','12345678','773-818-6331',],
+['John','Smith','Pristine Decors','Painter','pristinejf@gmail.com','12345678','12345678','773-575-8172',]
+]
 
-User.create!(first_name: "Nick", last_name: "Lisauskas", gender: "Male", password:'12345678', email: "nlisausk@alumni.nd.edu", birthdate: Time.strptime('08/28/1992 00:00', '%m/%d/%Y %H:%M'))
-# Property.create!(street_1: "2132 W Barry Avenue", street_2: "", city: "Chicago", state: "Illinois", zipcode: 60618, purchase_price: 582500, purchase_date: Time.strptime('06/23/2017 00:00', '%m/%d/%Y %H:%M'))
-# Tenant.create!(first_name: "John", last_name: "Smith", gender: "Male", birthdate: Time.strptime('08/28/1975 00:00', '%m/%d/%Y %H:%M'))
+contractor_list.each do |first_name, last_name, company, occupation, email, password, password_confirmation, phone|
+  Contractor.create(first_name: first_name, last_name: last_name, company: company, occupation: occupation, email: email,
+password: password,password_confirmation: password_confirmation, phone: phone)
+end
