@@ -4,12 +4,12 @@ class UserMailer < ApplicationMailer
  def welcome_email
    @user = params[:user]
    @url  = 'https://samepageco.app/login'
-   mail(to: @user.email, bcc: "nick.lisauskas@gmail.com", subject: 'Welcome to SamePage!')
+   mail(to: @user.email, bcc: "nick@samepageco.app", subject: 'Welcome to SamePage!')
  end
 
  def maintenance_notification
    @user = User.find_by_id(params[:maintenance_request][:user_id])
-   contractors = ["nick.lisauskas@gmail.com"]
+   contractors = ["nick@samepageco.app"]
    @contractors = Contractor.all
    @contractors.each do |contractor|
      contractors << contractor.email
