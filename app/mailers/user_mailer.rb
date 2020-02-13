@@ -3,7 +3,7 @@ class UserMailer < ApplicationMailer
 
  def welcome_email
    @user = params[:user]
-   @url  = 'https://samepagerealestate.herokuapp.com/login'
+   @url  = 'https://samepageco.app/login'
    mail(to: @user.email, bcc: "nick.lisauskas@gmail.com", subject: 'Welcome to SamePage!')
  end
 
@@ -16,9 +16,9 @@ class UserMailer < ApplicationMailer
    end
    binding.pry
    @maintenance_request = params[:maintenance_request]
-   @url  = 'https://samepagerealestate.herokuapp.com/maintenance_requests'
+   @url  = 'https://samepageco.app/maintenance_requests'
    mail(to: @user.email,
-     # bcc: contractors, 
+     # bcc: contractors,
      subject: 'New Maintenance Request Created')
  end
 end
