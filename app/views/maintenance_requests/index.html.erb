@@ -28,6 +28,50 @@
   <% end %>
   </div>
 
+  <h4>Bids You've Received</h4>
+  <div class="bids">
+    <% current_user.bids.each do |bid, approved| %>
+  <% next unless bid.approved == false && bid.maintenance_request.contractor_id == nil %>
+  <div class="bid">
+    <div class="thumbnail">
+    <div class="caption">
+      <strong>Request: <%= link_to bid.maintenance_request.title, maintenance_request_path(bid.maintenance_request) %></strong><br></br>
+      <strong>Request Created At: </strong><p><%= bid.created_at.strftime("%F %H:%M") %></p>
+      <strong>Cost of Job: </strong><p><%= number_to_currency(bid.price) %></p>
+      <strong>Contractor's Availability: </strong><p><%= bid.availability %></p>
+      <strong>Other Notes: </strong><p><%= bid.notes %></p>
+      <h4>Contractor Information: </h4>
+      <strong>Company: </strong><p><%= bid.contractor.company %></p>
+      <strong>Contractor's Name: </strong><p><%= bid.contractor.first_name %></p>
+      <p><%= button_to 'Award Bid', bid_award_path(bid), method: :put, data: { confirm: 'Are you sure?' }, class: "btn btn-default" %></p>
+    </div>
+    </div>
+    </div>
+    <% end %>
+    </div>
+
+  <h4>Bids You've Awarded</h4>
+
+  <div class="bids">
+    <% current_user.bids.each do |bid, approved| %>
+  <% next unless bid.approved == true %>
+  <div class="bid">
+    <div class="thumbnail">
+    <div class="caption">
+      <strong>Request: <%= link_to bid.maintenance_request.title, maintenance_request_path(bid.maintenance_request) %></strong><br></br>
+      <strong>Request Created At: </strong><p><%= bid.created_at.strftime("%F %H:%M") %></p>
+      <strong>Cost of Job: </strong><p><%= number_to_currency(bid.price) %></p>
+      <strong>Contractor's Availability: </strong><p><%= bid.availability %></p>
+      <strong>Other Notes: </strong><p><%= bid.notes %></p>
+      <h4>Contractor Information: </h4>
+      <strong>Company: </strong><p><%= bid.contractor.company %></p>
+      <strong>Contractor's Name: </strong><p><%= bid.contractor.first_name %></p>
+
+  </div>
+  </div>
+  </div>
+  <% end %>
+
 <h4>Resolved Requests</h4>
 
 <div class="requests">
