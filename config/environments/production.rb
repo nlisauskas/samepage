@@ -56,7 +56,7 @@ Rails.application.configure do
     port:                 587,
     domain:               'gmail.com',
     user_name:            'nick@samepageco.app',
-    password:             ENV['GMAIL_PASS']
+    password:             ENV['GMAIL_PASS'],
     authentication:       'plain',
     enable_starttls_auto: true  }
   config.action_mailer.perform_deliveries = true
