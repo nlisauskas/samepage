@@ -9,16 +9,40 @@ class UserMailer < ApplicationMailer
 
  def maintenance_notification
    @user = User.find_by_id(params[:maintenance_request][:user_id])
+   @maintenance_request = params[:maintenance_request]
    contractors = ["nick@samepageco.app"]
    @contractors = Contractor.all
-   @contractors.each do |contractor|
-     contractors << contractor.email
+
+   def active_category
+     if @maintenance_request.category = 'Plumbing'
+       'plumber'
+     elsif @maintenance_request.category = 'Landscaping'
+       'landscaper'
+     elsif @maintenance_request.category = 'HVAC'
+       'HVAC'
+     elsif @maintenance_request.category = 'Electricity'
+       'electrician'
+     elsif @maintenance_request.category = 'Locks / Security'
+       'locksmith'
+     elsif @maintenance_request.category = 'Floors'
+       'flooring specialist'
+     elsif @maintenance_request.category = 'Windows'
+       'window expert'
+     elsif @maintenance_request.category = 'Pests'
+       'pest control'
+     elsif @maintenance_request.category = 'Miscellaneous'
+       'handyman'
+     end
    end
-   binding.pry
-   @maintenance_request = params[:maintenance_request]
+
+   @contractors.each do |contractor, occupation|
+     if contractor.occupation.to_s.downcase == active_category
+     contractors << contractor.email
+    end
+   end
    @url  = 'https://samepageco.app/maintenance_requests'
    mail(to: @user.email,
-     # bcc: contractors,
+     bcc: contractors,
      subject: 'New Maintenance Request Created')
  end
 end
