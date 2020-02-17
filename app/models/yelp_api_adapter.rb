@@ -4,7 +4,10 @@ class YelpApiAdapter < ApplicationRecord
   def self.search(term, location)
     url = "#{API_HOST}#{SEARCH_PATH}"
     params = {
-      term: term,
+      term: case term
+      when "Miscellaneous"
+        "handyman"
+      else term end,
       location: location,
       limit: SEARCH_LIMIT,
       radius: 16093
