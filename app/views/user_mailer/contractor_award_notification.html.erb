@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hi, <%= @contractor.company %></h1>
+    <p>
+      Congratulations! Your bid has been approved for the following request:
+      <h2><%= @bid.maintenance_request.title %></h2>
+      Details about the bid can be found below:
+      <ul>
+        <li>Price: $<%= @bid.price %></li>
+        <li>Your Payout: $<%= @bid.payout %></li>
+        <li>Your Listed Availability: <%= @bid.availability %></li>
+        <li>Other Notes: <%= @bid.notes %></li>
+      </ul>
+    <p>SamePage will be in contact with you shortly to coordinate scheduling and payment for this job.</p>
+    <p>
+      To view details of the bid, just follow this link: <%= @url %>.
+    </p>
+  </body>
+</html>

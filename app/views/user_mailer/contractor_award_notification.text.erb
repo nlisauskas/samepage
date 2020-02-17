@@ -1,0 +1,13 @@
+Hi, <%= @contractor.company %>
+===============================================
+
+      Congratulations! Your bid has been approved for the following request:
+      <%= @bid.maintenance_request.title %>
+      Details about the bid can be found below:
+      Price: $<%= @bid.price %>
+      Your Payout: $<%= @bid.payout %>
+      Your Listed Availability: <%= @bid.availability %>
+      Other Notes: <%= @bid.notes %>
+
+      SamePage will be in contact with you shortly to coordinate scheduling and payment for this job.
+      To view details of the bid, just follow this link: <%= @url %>.
