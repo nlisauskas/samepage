@@ -18,6 +18,8 @@ class UserMailer < ApplicationMailer
        'plumber'
      elsif @maintenance_request.category = 'Landscaping'
        'landscaper'
+     elsif @maintenance_request.category = 'Painting'
+       'painter'
      elsif @maintenance_request.category = 'HVAC'
        'HVAC'
      elsif @maintenance_request.category = 'Electricity'
@@ -51,7 +53,7 @@ class UserMailer < ApplicationMailer
    @bid = params[:bid]
    @contractor = params[:contractor]
 
-   @url  = "https://samepageco.app/maintenance_requests/#{@bid.maintenance_request.id}" 
+   @url  = "https://samepageco.app/maintenance_requests/#{@bid.maintenance_request.id}"
    mail(to: @user.email,
      bcc: 'nick@samepageco.app',
      subject: 'You Received A New Bid')
