@@ -32,10 +32,14 @@ class BidsController < ApplicationController
   def create
     @bid = Bid.new(bid_params)
     @bid.maintenance_request = MaintenanceRequest.find_by_id(params[:bid][:maintenance_request])
+    @user = User.find_by_id(@bid.maintenance_request.user_id)
     @bid.contractor = current_contractor
     @bid.payout = @bid.price * 0.90
     respond_to do |format|
       if @bid.save
+        UserMailer.with(user: @user, bid: @bid, contractor: @bid.contractor).bid_notification.deliver_now
+        message = "New bid for your job at #{@bid.maintenance_request.property.street_1} was just created. The initial quote is $#{@bid.price} (subject to change). You can view more details at samepageco.app/maintenance_requests/#{@bid.maintenance_request.id}"
+        TwilioTextMessenger.new(message).call
         format.html { redirect_to @bid, notice: 'Bid was successfully created.' }
         format.json { render :show, status: :created, location: @bid }
       else

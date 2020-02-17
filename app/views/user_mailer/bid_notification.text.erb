@@ -1,0 +1,12 @@
+Hi, <%= @user.first_name %>
+===============================================
+
+      A bid has been submitted for the following maintenance request:
+      <%= @bid.maintenance_request.title %>
+      Details about the bid can be found below:
+      Price: $<%= @bid.price %>
+      Availability: <%= @bid.availability %>
+      Contractor: <%= @bid.contractor.company %>
+      Other Notes: <%= @bid.notes %>
+
+      To view details of the bid, just follow this link: <%= @url %>.

@@ -45,4 +45,15 @@ class UserMailer < ApplicationMailer
      bcc: contractors,
      subject: 'New Maintenance Request Created')
  end
+
+ def bid_notification
+   @user = params[:user]
+   @bid = params[:bid]
+   @contractor = params[:contractor]
+
+   @url  = "https://samepageco.app/maintenance_requests/#{@bid.maintenance_request.id}" 
+   mail(to: @user.email,
+     bcc: 'nick@samepageco.app',
+     subject: 'You Received A New Bid')
+ end
 end

@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hi, <%= @user.first_name %></h1>
+    <p>
+      A bid has been submitted for the following maintenance request:
+      <h2><%= @bid.maintenance_request.title %></h2>
+      Details about the bid can be found below:
+      <ul>
+        <li>Price: $<%= @bid.price %></li>
+        <li>Availability: <%= @bid.availability %></li>
+        <li>Contractor: <%= @bid.contractor.company %></li>
+        <li>Other Notes: <%= @bid.notes %></li>
+      </ul>
+    <p>
+      To view details of the bid, just follow this link: <%= @url %>.
+    </p>
+  </body>
+</html>
