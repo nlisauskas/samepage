@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>
+      A maintenance request has been created in the following zip code:<br>
+      <%= @maintenance_request.property.zipcode %><br>
+      Details about the request can be found below:</p>
+      <h2>Title: <%= @maintenance_request.title %></h2>
+      <ul>
+        <li>Category: <%= @maintenance_request.category %></li>
+        <li>Description: <%= @maintenance_request.description %></li>
+        <li>Created At: <%= @maintenance_request.created_at %></li>
+      </ul>
+    <p>
+      If you'd like to bid to work on this request, just follow this link: <%= @url %>.
+    </p>
+  </body>
+</html>

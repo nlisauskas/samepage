@@ -1,0 +1,12 @@
+
+      A maintenance request has been created in the following zip code:
+      <%= @maintenance_request.property.zipcode %>
+      Details about the request can be found below:
+      Title: <%= @maintenance_request.title %>
+
+        Category: <%= @maintenance_request.category %>
+        Description: <%= @maintenance_request.description %>
+        Created At: <%= @maintenance_request.created_at %>
+
+
+      If you'd like to bid to work on this request, just follow this link: <%= @url %>.

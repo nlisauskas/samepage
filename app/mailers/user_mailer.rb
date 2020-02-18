@@ -10,41 +10,47 @@ class UserMailer < ApplicationMailer
  def maintenance_notification
    @user = User.find_by_id(params[:maintenance_request][:user_id])
    @maintenance_request = params[:maintenance_request]
+   @url  = 'https://samepageco.app/maintenance_requests'
+   mail(to: @user.email,
+     bcc: 'nick@samepageco.app',
+     subject: 'New Maintenance Request Created')
+ end
+
+ def contractor_maintenance_notification
+   @maintenance_request = params[:maintenance_request]
    contractors = ["nick@samepageco.app"]
-   @contractors = Contractor.all
 
    def active_category
-     if @maintenance_request.category = 'Plumbing'
+     if @maintenance_request.category == 'Plumbing'
        'plumber'
-     elsif @maintenance_request.category = 'Landscaping'
+     elsif @maintenance_request.category == 'Landscaping'
        'landscaper'
-     elsif @maintenance_request.category = 'Painting'
+     elsif @maintenance_request.category == 'Painting'
        'painter'
-     elsif @maintenance_request.category = 'HVAC'
+     elsif @maintenance_request.category == 'HVAC'
        'HVAC'
-     elsif @maintenance_request.category = 'Electricity'
+     elsif @maintenance_request.category == 'Electricity'
        'electrician'
-     elsif @maintenance_request.category = 'Locks / Security'
+     elsif @maintenance_request.category == 'Locks / Security'
        'locksmith'
-     elsif @maintenance_request.category = 'Floors'
+     elsif @maintenance_request.category == 'Floors'
        'flooring specialist'
-     elsif @maintenance_request.category = 'Windows'
+     elsif @maintenance_request.category == 'Windows'
        'window expert'
-     elsif @maintenance_request.category = 'Pests'
+     elsif @maintenance_request.category == 'Pests'
        'pest control'
-     elsif @maintenance_request.category = 'Miscellaneous'
+     elsif @maintenance_request.category == 'Miscellaneous'
        'handyman'
      end
    end
 
-   @contractors.each do |contractor, occupation|
+   Contractor.all.each do |contractor, occupation|
      if contractor.occupation.to_s.downcase == active_category
      contractors << contractor.email
     end
    end
    @url  = 'https://samepageco.app/maintenance_requests'
-   mail(to: @user.email,
-     bcc: contractors,
+   mail(bcc: contractors,
      subject: 'New Maintenance Request Created')
  end
 

@@ -35,6 +35,7 @@ class MaintenanceRequestsController < ApplicationController
     respond_to do |format|
       if @maintenance_request.save
         UserMailer.with(user: @user, maintenance_request: @maintenance_request).maintenance_notification.deliver_now
+        UserMailer.with(maintenance_request: @maintenance_request).contractor_maintenance_notification.deliver_now
         message = "New maintenance request for '#{@maintenance_request.property.street_1}' was just created. Qualified contractors now being alerted."
         TwilioTextMessenger.new(message).call
         format.html { redirect_to @maintenance_request, notice: 'Maintenance request was successfully created.' }
