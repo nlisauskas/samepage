@@ -1,6 +1,10 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+.mr_image {
+  max-width: 30%;
+  height: auto;
+}
 
 .title-container {
   display: flex;

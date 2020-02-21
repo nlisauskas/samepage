@@ -31,6 +31,11 @@
     <%= select_tag "maintenance_request[property_id]", options_from_collection_for_select(current_user.properties, "id", "street_1"), required: true, class: "form-control"%>
   </div><br>
 
+  <div class="field">
+    <%= form.label :photos %>
+    <%= form.file_field :photo, class: "form-control"%>
+  </div><br>
+
   <div class="actions">
     <%= form.submit class: "btn btn-primary"%>
   </div><br>

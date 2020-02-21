@@ -63,6 +63,10 @@ class MaintenanceRequestsController < ApplicationController
   # PATCH/PUT /maintenance_requests/1
   # PATCH/PUT /maintenance_requests/1.json
   def update
+    binding.pry
+    if params[:photo]
+      @maintenance_request.attach(params[:photo])
+    end
     respond_to do |format|
       if @maintenance_request.update(maintenance_request_params)
         format.html { redirect_to @maintenance_request, notice: 'Maintenance request was successfully updated.' }
@@ -99,6 +103,6 @@ class MaintenanceRequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def maintenance_request_params
-      params.require(:maintenance_request).permit(:category, :description, :title, :property_id, :tenant_id, :user_id, :contractor_id, :resolved)
+      params.require(:maintenance_request).permit(:category, :description, :title, :property_id, :tenant_id, :user_id, :contractor_id, :resolved, :photo)
     end
 end

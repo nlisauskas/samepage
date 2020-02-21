@@ -34,6 +34,13 @@
   <%= link_to @maintenance_request.property.street_1, property_path(@maintenance_request.property) %>
 </p>
 
+<p>
+  <strong>Photo:</strong><br>
+<% if @maintenance_request.photo.attached? %>
+  <image class="mr_image" src="<%=(url_for(@maintenance_request.photo))%>">
+<% end %>
+</p>
+
 <strong>Potential Contractors for the Job:</strong><br></br>
 <div class="contractors">
   <% @yelp.each do | yelp | %>
