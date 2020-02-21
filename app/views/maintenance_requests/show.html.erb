@@ -95,4 +95,11 @@
   <%= @maintenance_request.property.street_1 %> <%= @maintenance_request.property.street_2 %>, <%= @maintenance_request.property.city %>, <%= @maintenance_request.property.state %>, <%= @maintenance_request.property.zipcode %>
 </p>
 
+<p>
+  <strong>Photo:</strong><br>
+<% if @maintenance_request.photo.attached? %>
+  <image class="mr_image" src="<%=(url_for(@maintenance_request.photo))%>">
+<% end %>
+</p>
+
 <% end %>

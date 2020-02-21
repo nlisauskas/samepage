@@ -14,6 +14,7 @@
 <div class="request">
   <div class="thumbnail">
   <div class="caption">
+    <strong>Request: <%= link_to maintenance_request.title, maintenance_request_path(maintenance_request) %></strong><br></br>
     <strong>Created At: </strong><p><%= maintenance_request.created_at.strftime("%F %H:%M") %></p>
     <strong>Category: </strong><p><%= maintenance_request.category %></p>
     <strong>Title: </strong><p><%= maintenance_request.title %></p>
@@ -81,6 +82,7 @@
 <div class="request">
   <div class="thumbnail">
   <div class="caption">
+    <strong>Request: <%= link_to maintenance_request.title, maintenance_request_path(maintenance_request) %></strong><br></br>
     <strong>Created At: </strong><p><%= maintenance_request.created_at.strftime("%F %H:%M") %></p>
     <strong>Category: </strong><p><%= maintenance_request.category %></p>
     <strong>Title: </strong><p><%= maintenance_request.title %></p>
