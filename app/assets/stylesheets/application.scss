@@ -1,6 +1,13 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+.body {
+  color: #004279;
+  font-family: 'Questrial', ;
+}
+
+*{font-family:'Questrial';}
+
 .mr_image {
   max-width: 30%;
   height: auto;
@@ -15,66 +22,73 @@
     h1 {
       margin: 0;
       color: #004279;
+      font-family: 'Questrial', ;
     }
-}
-
-.body {
-  color: #004279;
 }
 
 .properties {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  font-family: 'Questrial', ;
 }
 
 .property {
   width: 30%;
   min-width: 300px;
+  font-family: 'Questrial', ;
 }
 
 .tenants {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  font-family: 'Questrial', ;
 }
 
 .tenant {
   width: 30%;
   min-width: 300px;
+  font-family: 'Questrial', ;
 }
 
 .requests {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  font-family: 'Questrial', ;
 }
 
 .request {
   width: 30%;
   min-width: 300px;
+  font-family: 'Questrial', ;
 }
 
 .bids {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  font-family: 'Questrial', ;
 }
 
 .bid {
   width: 30%;
   min-width: 300px;
+  font-family: 'Questrial', ;
 }
 
 .contractors {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  font-family: 'Questrial', ;
 }
 
 .contractor {
   width: 30%;
   min-width: 300px;
+  font-family: 'Questrial', ;
 }
 
 .form-control {
@@ -84,12 +98,14 @@
 .btn {
   background-color: #004279;
   color: white;
+  font-family: 'Questrial', ;
 }
 
 .signup {
   background-color: white;
   color: #004279;
   font-weight: bold;
+  font-family: 'Questrial', ;
 }
 
 /* The hero image */

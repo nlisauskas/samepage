@@ -74,4 +74,14 @@ class UserMailer < ApplicationMailer
      bcc: 'nick@samepageco.app',
      subject: 'Your Bid Was Approved!')
  end
+
+ def comment_notification
+   @comment = params[:comment]
+   @bid = params[:bid]
+
+   @url  = "https://samepageco.app/maintenance_requests"
+   mail(
+     bcc: [@bid.contractor.email, @bid.maintenance_request.user.email, 'nick@samepageco.app'],
+     subject: "A new comment was added to a bid for #{@bid.maintenance_request.title}")
+ end
 end

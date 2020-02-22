@@ -63,7 +63,6 @@ class MaintenanceRequestsController < ApplicationController
   # PATCH/PUT /maintenance_requests/1
   # PATCH/PUT /maintenance_requests/1.json
   def update
-    binding.pry
     if params[:photo]
       @maintenance_request.attach(params[:photo])
     end

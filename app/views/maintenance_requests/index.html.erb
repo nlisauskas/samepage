@@ -15,7 +15,7 @@
   <div class="thumbnail">
   <div class="caption">
     <strong>Request: <%= link_to maintenance_request.title, maintenance_request_path(maintenance_request) %></strong><br></br>
-    <strong>Created At: </strong><p><%= maintenance_request.created_at.strftime("%F %H:%M") %></p>
+    <strong>Created At: </strong><p><%= time_ago_in_words(maintenance_request.created_at) %> ago</p>
     <strong>Category: </strong><p><%= maintenance_request.category %></p>
     <strong>Title: </strong><p><%= maintenance_request.title %></p>
     <strong>Description: </strong><p><%= maintenance_request.description %></p>
@@ -37,7 +37,7 @@
     <div class="thumbnail">
     <div class="caption">
       <strong>Request: <%= link_to bid.maintenance_request.title, maintenance_request_path(bid.maintenance_request) %></strong><br></br>
-      <strong>Request Created At: </strong><p><%= bid.created_at.strftime("%F %H:%M") %></p>
+      <strong>Bid Submitted: </strong><p><%= time_ago_in_words(bid.created_at) %> ago</p>
       <strong>Cost of Job: </strong><p><%= number_to_currency(bid.price) %></p>
       <strong>Contractor's Availability: </strong><p><%= bid.availability %></p>
       <strong>Other Notes: </strong><p><%= bid.notes %></p>
@@ -45,6 +45,15 @@
       <strong>Company: </strong><p><%= bid.contractor.company %></p>
       <strong>Contractor's Name: </strong><p><%= bid.contractor.first_name %></p>
       <p><%= button_to 'Award Bid', bid_award_path(bid), method: :put, data: { confirm: 'Are you sure?' }, class: "btn btn-default" %></p>
+
+      <%= form_for [bid, Comment.new] do |f| %>
+        <%= f.text_area :body, placeholder: "Add a comment" %><br/>
+        <%= f.submit "Add Comment" %>
+      <% end %>
+
+      <ul>
+        <%= render(partial: 'comments/comment', collection: bid.comments) %>
+      </ul>
     </div>
     </div>
     </div>
@@ -60,14 +69,21 @@
     <div class="thumbnail">
     <div class="caption">
       <strong>Request: <%= link_to bid.maintenance_request.title, maintenance_request_path(bid.maintenance_request) %></strong><br></br>
-      <strong>Request Created At: </strong><p><%= bid.created_at.strftime("%F %H:%M") %></p>
+      <strong>Bid Submitted: </strong><p><%= time_ago_in_words(bid.created_at) %> ago</p>
       <strong>Cost of Job: </strong><p><%= number_to_currency(bid.price) %></p>
       <strong>Contractor's Availability: </strong><p><%= bid.availability %></p>
       <strong>Other Notes: </strong><p><%= bid.notes %></p>
       <h4>Contractor Information: </h4>
       <strong>Company: </strong><p><%= bid.contractor.company %></p>
       <strong>Contractor's Name: </strong><p><%= bid.contractor.first_name %></p>
+      <%= form_for [bid, Comment.new] do |f| %>
+        <%= f.text_area :body, placeholder: "Add a comment" %><br/>
+        <%= f.submit "Add Comment" %>
+      <% end %>
 
+      <ul>
+        <%= render(partial: 'comments/comment', collection: bid.comments) %>
+      </ul>
   </div>
   </div>
   </div>
@@ -83,7 +99,7 @@
   <div class="thumbnail">
   <div class="caption">
     <strong>Request: <%= link_to maintenance_request.title, maintenance_request_path(maintenance_request) %></strong><br></br>
-    <strong>Created At: </strong><p><%= maintenance_request.created_at.strftime("%F %H:%M") %></p>
+    <strong>Request Created: </strong><p><%= time_ago_in_words(maintenance_request.created_at) %> ago</p>
     <strong>Category: </strong><p><%= maintenance_request.category %></p>
     <strong>Title: </strong><p><%= maintenance_request.title %></p>
     <strong>Description: </strong><p><%= maintenance_request.description %></p>
@@ -113,7 +129,7 @@
 <div class="request">
   <div class="thumbnail">
   <div class="caption">
-    <strong>Created At: </strong><p><%= maintenance_request.created_at.strftime("%F %H:%M") %></p>
+    <strong>Request Created: </strong><p><%= time_ago_in_words(maintenance_request.created_at) %> ago</p>
     <strong>Category: </strong><p><%= maintenance_request.category %></p>
     <strong>Title: </strong><p><%= maintenance_request.title %></p>
     <strong>Description: </strong><p><%= maintenance_request.description %></p>
@@ -137,6 +153,14 @@
       <strong>Description: </strong><p><%= bid.maintenance_request.description %></p>
       <strong>Bid Amount: </strong><p><%= number_to_currency(bid.price) %></p>
       <strong>Potential Payout: </strong><p><%= number_to_currency(bid.payout) %></p>
+      <%= form_for [bid, Comment.new] do |f| %>
+        <%= f.text_area :body, placeholder: "Add a comment" %><br/>
+        <%= f.submit "Add Comment" %>
+      <% end %>
+
+      <ul>
+        <%= render(partial: 'comments/comment', collection: bid.comments) %>
+      </ul>
   </div>
   </div>
   </div>
@@ -151,13 +175,21 @@
 <div class="request">
   <div class="thumbnail">
   <div class="caption">
-    <strong>Created At: </strong><p><%= bid.maintenance_request.created_at.strftime("%F %H:%M") %></p>
+    <strong>Request Created: </strong><p><%= time_ago_in_words(bid.maintenance_request.created_at) %> ago</p>
     <strong>Category: </strong><p><%= bid.maintenance_request.category %></p>
     <strong>Title: </strong><p><%= bid.maintenance_request.title %></p>
     <strong>Description: </strong><p><%= bid.maintenance_request.description %></p>
     <strong>Property: </strong><p><%= bid.maintenance_request.property.street_1 %></p>
     <p><%= link_to 'View This Job', maintenance_request_path(bid.maintenance_request), class: "btn btn-default" %></p>
     <p><%= link_to 'Mark Request Complete', resolve_maintenance_request_path(bid.maintenance_request), method: :put, data: { confirm: 'Are you sure?' }, class: "btn btn-default" %></p>
+    <%= form_for [bid, Comment.new] do |f| %>
+      <%= f.text_area :body, placeholder: "Add a comment" %><br/>
+      <%= f.submit "Add Comment" %>
+    <% end %>
+
+    <ul>
+      <%= render(partial: 'comments/comment', collection: bid.comments) %>
+    </ul>
 </div>
 </div>
 </div>
@@ -172,7 +204,7 @@
 <div class="request">
   <div class="thumbnail">
   <div class="caption">
-    <strong>Created At: </strong><p><%= maintenance_request.created_at.strftime("%F %H:%M") %></p>
+    <strong>Request Created: </strong><p><%= time_ago_in_words(maintenance_request.created_at) %> ago</p>
     <strong>Category: </strong><p><%= maintenance_request.category %></p>
     <strong>Title: </strong><p><%= maintenance_request.title %></p>
     <strong>Description: </strong><p><%= maintenance_request.description %></p>

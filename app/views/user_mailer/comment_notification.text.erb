@@ -1,0 +1,12 @@
+
+      A comment has been added to the following bid:
+      <%= @bid.maintenance_request.title %>
+      Comment: <%= @comment.body %>
+      Submitted by:
+    <% if @comment.user_id %>
+    <%= User.find_by_id(@comment.user_id).first_name %> <%= User.find_by_id(@comment.user_id).last_name %>
+    <% elsif @comment.contractor_id %>
+    <%= Contractor.find_by_id(@comment.contractor_id).company %>
+    <% end %>
+
+      To reply to this comment, please follow this link: <%= @url %>.

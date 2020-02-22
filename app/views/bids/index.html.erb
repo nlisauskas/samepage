@@ -61,12 +61,12 @@
 <h4>Bids You've Received</h4>
 <div class="bids">
   <% @bids.each do |bid, approved| %>
-<% next unless bid.approved == false && bid.maintenance_request.contractor_id == nil %> 
+<% next unless bid.approved == false && bid.maintenance_request.contractor_id == nil %>
 <div class="bid">
   <div class="thumbnail">
   <div class="caption">
     <strong>Request: <%= link_to bid.maintenance_request.title, maintenance_request_path(bid.maintenance_request) %></strong><br></br>
-    <strong>Request Created At: </strong><p><%= bid.created_at.strftime("%F %H:%M") %></p>
+    <strong>Request Created: </strong><p><%= time_ago_in_words(bid.created_at) %> ago</p>
     <strong>Cost of Job: </strong><p><%= number_to_currency(bid.price) %></p>
     <strong>Contractor's Availability: </strong><p><%= bid.availability %></p>
     <strong>Other Notes: </strong><p><%= bid.notes %></p>
@@ -89,7 +89,7 @@
   <div class="thumbnail">
   <div class="caption">
     <strong>Request: <%= link_to bid.maintenance_request.title, maintenance_request_path(bid.maintenance_request) %></strong><br></br>
-    <strong>Request Created At: </strong><p><%= bid.created_at.strftime("%F %H:%M") %></p>
+    <strong>Request Created: </strong><p><%= time_ago_in_words(bid.created_at) %> ago</p>
     <strong>Cost of Job: </strong><p><%= number_to_currency(bid.price) %></p>
     <strong>Contractor's Availability: </strong><p><%= bid.availability %></p>
     <strong>Other Notes: </strong><p><%= bid.notes %></p>

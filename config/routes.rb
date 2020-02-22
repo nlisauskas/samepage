@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :bids do
     patch :award
     put :award
+    resources :comments
   end
   resources :contractors do
     resources :bids
@@ -12,6 +13,7 @@ Rails.application.routes.draw do
 
   resources :maintenance_requests do
     resources :bids
+    resources :comments
     member do
       patch :resolve
       put :resolve
@@ -33,6 +35,9 @@ Rails.application.routes.draw do
     end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :sessions, only: [:new, :create, :destroy]
+  resources :comments do
+   resources :comments
+ end
   get 'home', to: 'welcome#home'
   get 'signup', to: 'users#new', as: 'signup'
   get 'contractor_signup', to: 'contractors#new', as: 'contractor_signup'
