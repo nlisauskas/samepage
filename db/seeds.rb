@@ -1,33 +1,7 @@
-contractor_list = [ ['Moritz','Welt','Landscaping Maintenance by Moritz Welt','Landscaper','moritz.welt@gmail.com','12345678','12345678','(773) 297-5671',],
-['John','Smith','JR Landscaping Service','Landscaper','nfo@jrlandscapingservice.com','12345678','12345678','(773) 342-4009',],
-['John','Smith','The Landscaper Guy','Landscaper','thelandscaperguy1@yahoo.com','12345678','12345678','(773) 991-0523',],
-['John','Smith','Power Plumbing & Sewer Contractor','Plumber','power@powerplumbinginc.com','12345678','12345678','773-248-9574',],
-['John','Smith','Vanguard Plumbing & Sewer','Plumber','vanguardplumbing@gmail.com','12345678','12345678','(773) 985-8636',],
-['John','Smith','Apex Plumbing Chicago','Plumber','office@apexplumbingchicago.com','12345678','12345678','773-477-7714',],
-['John','Smith','Giant HVAC','HVAC','frank@gianthvac.com','12345678','12345678','(773) 539-9629',],
-['John','Smith','Patrick Mechanical Inc','HVAC','info@patrickmechanicalinc.com','12345678','12345678','1-773-283-6161',],
-['John','Smith','Miron HVAC','HVAC','service@mironhvac.com','12345678','12345678','8474835125',],
-['John','Smith','T&D Electrical','Electrician','office.tdelectrical@gmail.com','12345678','12345678','(773) 481-9225',],
-['Neville','White','Blacklite Electric','Electrician','Neville@blackliteelectric.com','12345678','12345678','312-399-3223',],
-['John','Smith','Addison Electrical Services','Electrician','services@addisonelectricalservices.com','12345678','12345678','872-215-5595',],
-['John','Smith','ChiTown Locksmith','Locksmith','info@chitownlocksmith.com','12345678','12345678','(773) 552-2100',],
-['John','Smith','R.O.N Locksmith','Locksmith','info@locksmith-illinois.com','12345678','12345678','773-828-5249',],
-['John','Smith','Security Shop Inc','Locksmith','tom@securityshopinc.com','12345678','12345678','773-249-2023',],
-['John','Smith','Rovins Flooring','Flooring Specialist','contact@rovinsflooring.com','12345678','12345678','(773)-704-1550',],
-['John','Smith','Yonan Carpet One','Flooring Specialist','customerservice@yonancarpetone.com','12345678','12345678','773.889.7500',],
-['John','Smith','Floorecki','Flooring Specialist','Floorecki@gmail.com','12345678','12345678','773-790-3887',],
-['John','Smith','Apex Window Werx','Window Expert','sales@apexwindowwerks.com','12345678','12345678','(847) 557-9600',],
-['John','Smith','M and J Window Repair','Window Expert','service@mandjwindowrepair.com','12345678','12345678','708-381-0820',],
-['John','Smith','Lakeview Glass Inc','Window Expert','lakeviewglass@gmail.com','12345678','12345678','773-871-7170',],
-['John','Smith','Pest Control Experts Chicago','Pest Control','service@pestcontrolexpertschicago.com','12345678','12345678','773-789-9789',],
-['John','Smith','Resolve Pest Solutions','Pest Control','info@resolvepestsolutions.com','12345678','12345678','773-756-1404',],
-['John','Smith','Fox Pest Control','Pest Control','chicago@fox-pest.com','12345678','12345678','(331) 304-0085',],
-['John','Smith','BJ Construction Group','General Contractor','info@bjconstructiongroup.com','12345678','12345678','(312) 523-4757',],
-['Paul','Smith','Ultra Builds','General Contractor','ultrabuildsinc@gmail.com','12345678','12345678','7736683838',],
-['John','Smith','Irpino Construction','General Contractor','d@irpinogroup.com','12345678','12345678','773-525-7345',],
-['John','Smith','McMaster Painting and Decorating','Painter','info@mcmasterpainting.com','12345678','12345678','(773) 268-2050',],
-['Andy','Smith','Windy Painters','Painter','andy@windypainters.com','12345678','12345678','773-818-6331',],
-['John','Smith','Pristine Decors','Painter','pristinejf@gmail.com','12345678','12345678','773-575-8172',]
+contractor_list = [
+  ['John','Smith','Lincoln Home Services','Handyman','lincolnhomeservices@hotmail.com','12345678','12345678',' (312) 671-5553',],
+['John','Smith','Mensch with a Wrench','Handyman','michael@menschwrenchchicago.com','12345678','12345678','(773) 791-7769',],
+['John','Smith','Evanston Handyman','Handyman','office@evanstonhandyman.com','12345678','12345678','(847) 946-8079',]
 ]
 
 contractor_list.each do |first_name, last_name, company, occupation, email, password, password_confirmation, phone|
