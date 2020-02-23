@@ -6,6 +6,18 @@
   </head>
   <body>
     <h1>Hi, <%= @user.first_name %></h1>
+    <% if @bid.info_requested == true %>
+    <p>
+      More information has been requested about your job:
+      <h2><%= @bid.maintenance_request.title %></h2>
+      <ul>
+        <li>Availability: <%= @bid.availability %></li>
+        <li>Contractor: <%= @bid.contractor.company %></li>
+        <li>Notes: <%= @bid.notes %></li>
+      </ul>
+      <p>You may want to consider editing your maintenance request to be more clear.</p>
+    <p>
+      <% else %>
     <p>
       A bid has been submitted for the following maintenance request:
       <h2><%= @bid.maintenance_request.title %></h2>
@@ -16,6 +28,7 @@
         <li>Contractor: <%= @bid.contractor.company %></li>
         <li>Other Notes: <%= @bid.notes %></li>
       </ul>
+      <% end %>
     <p>
       To view details of the bid, just follow this link: <%= @url %>.
     </p>

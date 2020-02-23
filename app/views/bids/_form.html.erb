@@ -7,16 +7,23 @@
       <% bid.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
+        <li>Please note you must submit a bid price OR request more information to submit this form.</li>
       </ul>
     </div>
   <% end %>
 
   <div class="field">
     <%= form.label "Your Bid ($)" %>
-    <%= form.number_field :price, in: 1.00..20000.00, required: true, class: "form-control"%>
+    <%= form.number_field :price, in: 1.00..20000.00, class: "form-control"%>
   </div>
 
-  <em>Note: Your payout will be 90% of your bid price.</em><br></br>
+  <em>Note: Your payout will be 90% of your bid price.</em><br>
+
+  <h3>Not ready to make a bid? Check the box below and leave follow up questions in the 'Notes' section.</h3>
+  <div class="field">
+    <%= form.check_box :info_requested %>
+    <%= form.label "More information needed to bid" %>
+  </div><br>
 
   <div class="field">
     <%= form.label "When is your soonest availability?" %>
@@ -24,11 +31,11 @@
   </div><br>
 
   <div class="field">
-    <%= form.label "Other Notes" %>
+    <%= form.label "Other Notes (questions if more info is needed)" %>
     <%= form.text_field :notes, class: "form-control"%>
   </div><br>
 
-  <%= form.hidden_field :maintenance_request, value: @maintenance_request.id %>
+  <%= form.hidden_field :maintenance_request_id, value: @maintenance_request.id %>
 
   <div class="actions">
     <%= form.submit class: "btn btn-primary"%>

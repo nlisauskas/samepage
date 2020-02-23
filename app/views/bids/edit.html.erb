@@ -1,6 +1,13 @@
-<h1>Editing Bid</h1>
-
+<h1>Editing Bid for "<%= @maintenance_request.title %>"</h1>
+<p>Description: <%= @maintenance_request.description %></p>
+<p>Zip Code: <%= @maintenance_request.property.zipcode %></p>
+<% if @maintenance_request.photo.attached? %>
+<p>
+  Photo:<br>
+  <image class="mr_image" src="<%=(url_for(@maintenance_request.photo))%>">
+</p>
+<% end %>
 <%= render 'form', bid: @bid %>
 
 <%= link_to 'Show', @bid %> |
-<%= link_to 'Back', bids_path %>
+<%= link_to 'Back', maintenance_requests_path %>

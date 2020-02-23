@@ -1,6 +1,16 @@
 Hi, <%= @user.first_name %>
 ===============================================
 
+<% if @bid.info_requested == true %>
+  More information has been requested about your job:
+  <%= @bid.maintenance_request.title %>
+
+    Availability: <%= @bid.availability %>
+    Contractor: <%= @bid.contractor.company %>
+    Notes: <%= @bid.notes %>
+    You may want to consider editing your maintenance request to be more clear.
+  <% else %>
+
       A bid has been submitted for the following maintenance request:
       <%= @bid.maintenance_request.title %>
       Details about the bid can be found below:
@@ -8,5 +18,7 @@ Hi, <%= @user.first_name %>
       Availability: <%= @bid.availability %>
       Contractor: <%= @bid.contractor.company %>
       Other Notes: <%= @bid.notes %>
+
+    <% end %>
 
       To view details of the bid, just follow this link: <%= @url %>.

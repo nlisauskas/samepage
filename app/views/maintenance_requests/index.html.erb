@@ -151,8 +151,13 @@
       <strong>Title: </strong><p><%= bid.maintenance_request.title %></p>
       <strong>Category: </strong><p><%= bid.maintenance_request.category %></p>
       <strong>Description: </strong><p><%= bid.maintenance_request.description %></p>
+      <% if bid.price %>
       <strong>Bid Amount: </strong><p><%= number_to_currency(bid.price) %></p>
       <strong>Potential Payout: </strong><p><%= number_to_currency(bid.payout) %></p>
+      <% else %>
+      <h4><strong>You've requested more information before bidding on this job.</strong></h4>
+      <p><%= link_to 'Add a price to your bid', edit_bid_path(bid) %> when you have the information you need.</p>
+      <% end %>
       <%= form_for [bid, Comment.new] do |f| %>
         <%= f.text_area :body, placeholder: "Add a comment" %><br/>
         <%= f.submit "Add Comment" %>
