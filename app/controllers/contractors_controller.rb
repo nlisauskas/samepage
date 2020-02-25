@@ -72,7 +72,7 @@ class ContractorsController < ApplicationController
               token_url: '/oauth/token'
             }
             code = params[:code]
-            client = OAuth2::Client.new(Rails.application.credentials.config[:STRIPE_CONNECT_CLIENT_ID], Rails.application.credentials.config[:STRIPE_SECRET_KEY], options)
+            client = OAuth2::Client.new(ENV['STRIPE_CONNECT_CLIENT_ID'], ENV['STRIPE_SECRET_KEY'], options)
             @resp = client.auth_code.get_token(code, :params => {:scope => 'read_write'})
             @access_token = @resp.token
             binding.pry
