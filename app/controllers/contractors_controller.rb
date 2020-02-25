@@ -1,5 +1,5 @@
 class ContractorsController < ApplicationController
-  before_action :set_contractor, only: [:show, :edit, :update, :destroy]
+  before_action :set_contractor, only: [:show, :edit, :update, :destroy, :stripe_callback]
 
   # GET /contractors
   # GET /contractors.json
@@ -10,6 +10,8 @@ class ContractorsController < ApplicationController
   # GET /contractors/1
   # GET /contractors/1.json
   def show
+    @account = Stripe::Account.retrieve("#{@contractor.stripe_uid.to_s}") if @contractor.stripe_uid.present?
+    @balance = Stripe::Balance.retrieve() if @contractor.stripe_uid.present?
   end
 
   # GET /contractors/new
@@ -63,6 +65,21 @@ class ContractorsController < ApplicationController
     end
   end
 
+  def stripe_callback
+            options = {
+              site: 'https://connect.stripe.com',
+              authorize_url: '/oauth/authorize',
+              token_url: '/oauth/token'
+            }
+            code = params[:code]
+            client = OAuth2::Client.new(Rails.application.credentials.config[:STRIPE_CONNECT_CLIENT_ID], Rails.application.credentials.config[:STRIPE_SECRET_KEY], options)
+            @resp = client.auth_code.get_token(code, :params => {:scope => 'read_write'})
+            @access_token = @resp.token
+            binding.pry
+            @contractor.update!(stripe_uid: @resp.params["stripe_user_id"]) if @resp
+            flash[:notice] = "Your account has been successfully created and is ready to process payments!"
+   end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_contractor
@@ -71,6 +88,6 @@ class ContractorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contractor_params
-      params.require(:contractor).permit(:first_name, :last_name, :company, :email, :password, :password_confirmation, :maintenance_request_id, :phone, :occupation)
+      params.require(:contractor).permit(:first_name, :last_name, :company, :email, :password, :password_confirmation, :maintenance_request_id, :phone, :occupation, :stripe_uid)
     end
 end

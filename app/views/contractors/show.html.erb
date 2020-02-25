@@ -4,6 +4,18 @@
   <%= link_to "Edit Profile", edit_contractor_path(@contractor), class: "btn btn-default" %>
 </div>
 
+<div>
+<% if @contractor.stripe_uid.present? %>
+       <p>You're ready to receive payment for work on SamePage via Stripe.</p>
+<% else %>
+       <a href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id=<%= Rails.application.credentials.config[:STRIPE_CONNECT_CLIENT_ID] %>&scope=read_write">Connect with Stripe to receive payment for work on SamePage.</a>
+<% end %>
+</div>
+
+<% if @contractor.stripe_uid.present? %>
+<h1>Your Balance: $<%= @balance.pending.first["amount"].to_f/100 %></h1>
+<% end %>
+
 <p>
   <strong>Name:</strong>
   <%= @contractor.first_name %> <%= @contractor.last_name %>

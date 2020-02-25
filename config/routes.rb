@@ -39,8 +39,12 @@ Rails.application.routes.draw do
    resources :comments
  end
   get 'home', to: 'welcome#home'
+  get 'privacy', to: 'home#privacy'
+  get 'terms', to: 'home#terms'
   get 'signup', to: 'users#new', as: 'signup'
   get 'contractor_signup', to: 'contractors#new', as: 'contractor_signup'
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to:'sessions#destroy', as: 'logout'
+  get "settings/payment-info/contractors/auth/stripe_connect/callback", to:"contractors#stripe_callback"
+  get "settings/payment-info/users/auth/stripe_connect/callback", to:"users#stripe_callback"
 end
