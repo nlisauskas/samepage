@@ -8,7 +8,7 @@
 <% if @contractor.stripe_uid.present? %>
        <p>You're ready to receive payment for work on SamePage via Stripe.</p>
 <% else %>
-       <a href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id=<%= ENV[':STRIPE_CONNECT_CLIENT_ID'] %>&scope=read_write">Connect with Stripe to receive payment for work on SamePage.</a>
+       <a href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id=<%= ENV['STRIPE_CONNECT_CLIENT_ID'] %>&scope=read_write">Connect with Stripe to receive payment for work on SamePage.</a>
 <% end %>
 </div>
 
