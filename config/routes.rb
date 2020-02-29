@@ -43,7 +43,7 @@ Rails.application.routes.draw do
  end
 
   get 'home', to: 'welcome#home'
-  get 'payments/webhook', to: 'payments#webhook'
+  post 'payments/webhook', to: 'payments#webhook'
   get 'privacy', to: 'home#privacy'
   get 'terms', to: 'home#terms'
   get 'signup', to: 'users#new', as: 'signup'

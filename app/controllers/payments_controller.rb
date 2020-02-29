@@ -32,7 +32,7 @@ session = Stripe::Checkout::Session.create(
   end
 
   def webhook
-    binding.pry
+  binding.pry
   sig_header = Rails.application.credentials.config[:HTTP_STRIPE_SIGNATURE]
 
   begin
