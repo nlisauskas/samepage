@@ -44,7 +44,29 @@
       <h4>Contractor Information: </h4>
       <strong>Company: </strong><p><%= bid.contractor.company %></p>
       <strong>Contractor's Name: </strong><p><%= bid.contractor.first_name %></p>
-      <p><%= button_to 'Award Bid', bid_award_path(bid), method: :put, data: { confirm: 'Are you sure?' }, class: "btn btn-default" %></p>
+      <p>
+        <a data-subscribe="<%= bid.id %>" href="#">Award Bid</a>
+        <script src="https://js.stripe.com/v3/"></script>
+        <script>
+          document
+            .querySelector('[data-subscribe]')
+            .addEventListener('click', (event) => {
+              fetch(`/payments/${event.currentTarget.dataset.subscribe}/bid_award`)
+              .then(response => response.json())
+              .then((json) => {
+                var stripe = Stripe('pk_test_rkeH8PaTZrvEbiob5652KqQv00ccn9JMnG');
+                alert("In order to complete awarding this bid, you will be redirected to enter payment details. Your card will not be charged until the work is completed.");
+                stripe.redirectToCheckout({
+                  sessionId: json.session_id
+                })
+              .then(function (result) {
+              });
+            });
+            event.returnValue = false;
+          });
+        </script>
+        <%= button_to 'Award Bid', bid_award_path(bid), method: :put, data: { confirm: 'Are you sure?' }, class: "btn btn-default" %>
+      </p>
 
       <%= form_for [bid, Comment.new] do |f| %>
         <%= f.text_area :body, placeholder: "Add a comment" %><br/>

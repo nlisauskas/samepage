@@ -38,7 +38,12 @@ Rails.application.routes.draw do
   resources :comments do
    resources :comments
  end
+ resources :payments , only: [:new, :create] do
+   get 'bid_award', to: 'payments#bid_award'
+ end
+
   get 'home', to: 'welcome#home'
+  get 'payments/webhook', to: 'payments#webhook'
   get 'privacy', to: 'home#privacy'
   get 'terms', to: 'home#terms'
   get 'signup', to: 'users#new', as: 'signup'
