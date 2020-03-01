@@ -7,7 +7,27 @@
 </div>
 
 
-<h4>Open Requests</h4>
+<h4>Completed Jobs Awaiting Approval</h4>
+<div class="requests">
+  <% @maintenance_requests.each do |maintenance_request, resolved| %>
+    <% next unless maintenance_request.contractor_resolved == true && maintenance_request.resolved == false%>
+<div class="request">
+  <div class="thumbnail">
+  <div class="caption">
+    <strong>Request: <%= link_to maintenance_request.title, maintenance_request_path(maintenance_request) %></strong><br></br>
+    <strong>Request Created: </strong><p><%= time_ago_in_words(maintenance_request.created_at) %> ago</p>
+    <strong>Category: </strong><p><%= maintenance_request.category %></p>
+    <strong>Title: </strong><p><%= maintenance_request.title %></p>
+    <strong>Description: </strong><p><%= maintenance_request.description %></p>
+    <strong>Property: </strong><p><%= maintenance_request.property.street_1 %></p>
+    <p><%= button_to 'Resolve Request', resolve_maintenance_request_path(maintenance_request), method: :put, data: { confirm: 'Are you sure?' }, class: "btn btn-default" %></p>
+</div>
+</div>
+</div>
+<% end %>
+</div>
+
+<h4>Your Open Requests</h4>
 <div class="requests">
   <% @maintenance_requests.each do |maintenance_request, resolved| %>
     <% next unless maintenance_request.resolved == false %>
@@ -51,6 +71,7 @@
           document
             .querySelector('[data-subscribe]')
             .addEventListener('click', (event) => {
+              debugger
               fetch(`/payments/${event.currentTarget.dataset.subscribe}/bid_award`)
               .then(response => response.json())
               .then((json) => {
@@ -65,7 +86,6 @@
             event.returnValue = false;
           });
         </script>
-        <%= button_to 'Award Bid', bid_award_path(bid), method: :put, data: { confirm: 'Are you sure?' }, class: "btn btn-default" %>
       </p>
 
       <%= form_for [bid, Comment.new] do |f| %>
@@ -198,7 +218,7 @@
 <h4>Jobs You've Been Awarded</h4>
 <div class="requests">
   <% current_contractor.bids.each do |bid| %>
-    <% next unless bid[:approved] == true && bid.maintenance_request.resolved == false %>
+    <% next unless bid[:approved] == true && bid.maintenance_request.resolved == false && bid.maintenance_request.contractor_resolved == false%>
 <div class="request">
   <div class="thumbnail">
   <div class="caption">
@@ -208,7 +228,7 @@
     <strong>Description: </strong><p><%= bid.maintenance_request.description %></p>
     <strong>Property: </strong><p><%= bid.maintenance_request.property.street_1 %></p>
     <p><%= link_to 'View This Job', maintenance_request_path(bid.maintenance_request), class: "btn btn-default" %></p>
-    <p><%= link_to 'Mark Request Complete', resolve_maintenance_request_path(bid.maintenance_request), method: :put, data: { confirm: 'Are you sure?' }, class: "btn btn-default" %></p>
+    <p><%= link_to 'Mark Job Complete', contractor_resolve_maintenance_request_path(bid.maintenance_request), method: :put, data: { confirm: 'Are you sure? You will receive payment for this job when the person who submitted the job approves the work or in 24 hours - whichever comes first.' }, class: "btn btn-default" %></p>
     <%= form_for [bid, Comment.new] do |f| %>
       <%= f.text_area :body, placeholder: "Add a comment" %><br/>
       <%= f.submit "Add Comment" %>
@@ -227,7 +247,7 @@
 
 <div class="requests">
   <% @maintenance_requests.each do |maintenance_request, resolved| %>
-    <% next unless maintenance_request[:contractor_id] == current_contractor.id && maintenance_request.resolved == true  %>
+    <% next unless maintenance_request[:contractor_id] == current_contractor.id && maintenance_request.contractor_resolved == true  %>
 <div class="request">
   <div class="thumbnail">
   <div class="caption">

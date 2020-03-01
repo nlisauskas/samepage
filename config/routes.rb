@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     member do
       patch :resolve
       put :resolve
+      patch :contractor_resolve
+      put :contractor_resolve
     end
   end
 

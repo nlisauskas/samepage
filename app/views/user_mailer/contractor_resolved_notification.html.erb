@@ -1,0 +1,20 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hi, <%= @user.first_name %></h1>
+    <p>
+      Your maintenance request has been marked resolved. Please confirm you are satisfied with the work by resolving the request on SamePage at <%= @url %>.
+      If you do not resolve the request within 24 hours, payment will be processed automatically.<br>
+      Details about the request can be found below:</p>
+      <h2>Title: <%= @maintenance_request.title %></h2>
+      <ul>
+        <li>Category: <%= @maintenance_request.category %></li>
+        <li>Description: <%= @maintenance_request.description %></li>
+        <li>Created At: <%= @maintenance_request.created_at %></li>
+      </ul>
+  </body>
+</html>

@@ -4,7 +4,6 @@ class PaymentsController < ApplicationController
   end
 
   def create
-    binding.pry
     StripeChargesServices.new(payments_params, current_user).call
     @bid = Bid.find_by_id(payments_params[:bid])
     redirect_to bid_award_path(bid)
@@ -15,8 +14,10 @@ class PaymentsController < ApplicationController
     Stripe.api_key = 'sk_test_bRkOf8kxBAex2c0LaES1J4Ry00yOyhM5o7'
 
 session = Stripe::Checkout::Session.create(
-  payment_method_types: ['card'],
-  submit_type: 'book',
+  # {
+    payment_method_types: ['card'],
+    customer_email: current_user.email,
+    submit_type: 'book',
     line_items: [{
       name: "Awarding bid for maintenance request: #{@bid.maintenance_request.title}",
       description: "Company: #{@bid.contractor.company}",
@@ -24,19 +25,29 @@ session = Stripe::Checkout::Session.create(
       currency: 'usd',
       quantity: 1,
       }],
+      payment_intent_data: {
+    capture_method: 'manual',
+    application_fee_amount: @bid.price * 10,
+        },
+        metadata: {
+          bid: @bid.id
+        },
+      client_reference_id: current_user.id,
       success_url: "http://localhost:3000/maintenance_requests/#{@bid.maintenance_request.id}?session_id={CHECKOUT_SESSION_ID}",
       cancel_url: 'http://localhost:3000/maintenance_requests',
+    # },
+    #   {stripe_account: "#{@bid.contractor.stripe_uid}"}
     )
 
     render json: { session_id: session.id }
   end
 
   def webhook
-  binding.pry
-  sig_header = Rails.application.credentials.config[:HTTP_STRIPE_SIGNATURE]
+  sig_header = request.env['HTTP_STRIPE_SIGNATURE']
 
   begin
-    event = Stripe::Webhook.construct_event(request.body.read, sig_header, Rails.application.credentials.config[:STRIPE_ENDPOINT_SECRET])
+    creds = Rails.application.credentials.config[:STRIPE_ENDPOINT_SECRET]
+    event = Stripe::Webhook.construct_event(request.body.read, sig_header, creds)
   rescue JSON::ParserError
     return head :bad_request
   rescue Stripe::SignatureVerificationError
@@ -50,21 +61,22 @@ end
 
 private
 
-def build_subscription(stripe_subscription)
-    Subscription.new(plan_id: stripe_subscription.plan.id,
-                     stripe_id: stripe_subscription.id,
-                     current_period_ends_at: Time.zone.at(stripe_subscription.current_period_end))
-end
-
 def webhook_checkout_session_completed(event)
   binding.pry
   object = event['data']['object']
   customer = Stripe::Customer.retrieve(object['customer'])
-  stripe_subscription = Stripe::Subscription.retrieve(object['subscription'])
-  subscription = build_subscription(stripe_subscription)
   user = User.find_by(id: object['client_reference_id'])
-  user.subscription.interrupt if user.subscription.present?
-  user.update!(stripe_id: customer.id, subscription: subscription)
+  user.update!(stripe_uid: customer.id)
+## award bid
+  @bid = Bid.find_by_id(event['data']['object']['metadata']['bid'])
+  if @bid.approved?
+    @bid.update_attribute(:approved, false)
+  else
+    @bid.update_attribute(:approved, true)
+    @bid.update_attribute(:payment_intent, event['data']['object']['payment_intent'])
+    @bid.maintenance_request.contractor_id = @bid.contractor_id
+    @bid.maintenance_request.save
+    UserMailer.with(bid: @bid, contractor: @bid.contractor).contractor_award_notification.deliver_now
+  end
 end
-
 end

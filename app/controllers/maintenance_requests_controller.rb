@@ -1,5 +1,5 @@
 class MaintenanceRequestsController < ApplicationController
-  before_action :set_maintenance_request, only: [:show, :edit, :update, :destroy, :resolve]
+  before_action :set_maintenance_request, only: [:show, :edit, :update, :destroy, :resolve, :contractor_resolve]
   require 'pry'
   # GET /maintenance_requests
   # GET /maintenance_requests.json
@@ -48,11 +48,35 @@ class MaintenanceRequestsController < ApplicationController
   end
 
   def resolve
+    binding.pry
+    @maintenance_request.bids.each do |bid|
+      if bid.approved == true
+        @bid = Bid.find_by_id(bid.id)
+      end
+    end
+
     @maintenance_request
     if @maintenance_request.resolved?
       @maintenance_request.update_attribute(:resolved, false)
     else
       @maintenance_request.update_attribute(:resolved, true)
+      Stripe::PaymentIntent.capture(
+        @bid.payment_intent
+      )
+    end
+    respond_to do |format|
+        format.html { redirect_to maintenance_requests_url, notice: 'Maintenance request was successfully updated.' }
+        format.json { render :show, status: :ok, location: @maintenance_request }
+    end
+  end
+
+  def contractor_resolve
+    @maintenance_request
+    if @maintenance_request.contractor_resolved?
+      @maintenance_request.update_attribute(:contractor_resolved, false)
+    else
+      @maintenance_request.update_attribute(:contractor_resolved, true)
+      UserMailer.with(user: @maintenance_request.user, maintenance_request: @maintenance_request).contractor_resolved_notification.deliver_now
     end
     respond_to do |format|
         format.html { redirect_to maintenance_requests_url, notice: 'Maintenance request was successfully updated.' }
@@ -102,6 +126,6 @@ class MaintenanceRequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def maintenance_request_params
-      params.require(:maintenance_request).permit(:category, :description, :title, :property_id, :tenant_id, :user_id, :contractor_id, :resolved, :photo)
+      params.require(:maintenance_request).permit(:category, :description, :title, :property_id, :tenant_id, :user_id, :contractor_id, :resolved, :photo, :contractor_resolved)
     end
 end

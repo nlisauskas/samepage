@@ -1,0 +1,11 @@
+Hi, <%= @user.first_name %>
+===============================================
+
+      Your maintenance request has been marked resolved. Please confirm you are satisfied with the work by resolving the request on SamePage at <%= @url %>.
+      If you do not resolve the request within 24 hours, payment will be processed automatically.
+      Details about the request can be found below:
+      Title: <%= @maintenance_request.title %>
+
+        Category: <%= @maintenance_request.category %>
+        Description: <%= @maintenance_request.description %>
+        Created At: <%= @maintenance_request.created_at %>
