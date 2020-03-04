@@ -48,13 +48,13 @@ class MaintenanceRequestsController < ApplicationController
   end
 
   def resolve
-    binding.pry
+
     @maintenance_request.bids.each do |bid|
       if bid.approved == true
         @bid = Bid.find_by_id(bid.id)
       end
     end
-
+    binding.pry
     @maintenance_request
     if @maintenance_request.resolved?
       @maintenance_request.update_attribute(:resolved, false)

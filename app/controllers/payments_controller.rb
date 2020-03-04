@@ -11,10 +11,8 @@ class PaymentsController < ApplicationController
 
   def bid_award
     @bid = Bid.find_by_id(params[:payment_id])
-    Stripe.api_key = 'sk_test_bRkOf8kxBAex2c0LaES1J4Ry00yOyhM5o7'
-
-session = Stripe::Checkout::Session.create(
-  # {
+    Stripe.api_key = ENV['STRIPE_SECRET_KEY']
+    session = Stripe::Checkout::Session.create(
     payment_method_types: ['card'],
     customer_email: current_user.email,
     submit_type: 'book',
@@ -28,15 +26,16 @@ session = Stripe::Checkout::Session.create(
       payment_intent_data: {
     capture_method: 'manual',
     application_fee_amount: @bid.price * 10,
-        },
+    transfer_data: {
+      destination: "#{@bid.contractor.stripe_uid}",
+      },
+      },
         metadata: {
           bid: @bid.id
         },
       client_reference_id: current_user.id,
       success_url: "http://localhost:3000/maintenance_requests/#{@bid.maintenance_request.id}?session_id={CHECKOUT_SESSION_ID}",
       cancel_url: 'http://localhost:3000/maintenance_requests',
-    # },
-    #   {stripe_account: "#{@bid.contractor.stripe_uid}"}
     )
 
     render json: { session_id: session.id }
@@ -62,7 +61,6 @@ end
 private
 
 def webhook_checkout_session_completed(event)
-  binding.pry
   object = event['data']['object']
   customer = Stripe::Customer.retrieve(object['customer'])
   user = User.find_by(id: object['client_reference_id'])
