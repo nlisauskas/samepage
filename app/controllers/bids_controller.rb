@@ -19,8 +19,13 @@ class BidsController < ApplicationController
 
   # GET /bids/new
   def new
+    binding.pry
+    if current_contractor.stripe_uid?
     @bid = Bid.new
     @maintenance_request = MaintenanceRequest.find_by_id(params[:maintenance_request_id])
+    else
+    redirect_to contractor_path(current_contractor), :notice => "You must connect your account with Stripe prior to placing bids on the platform."
+    end
   end
 
   # GET /bids/1/edit
