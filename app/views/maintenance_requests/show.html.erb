@@ -35,10 +35,15 @@
 </p>
 
 <p>
-  <strong>Photo:</strong><br>
-<% if @maintenance_request.photo.attached? %>
-  <image class="mr_image" src="<%=(url_for(@maintenance_request.photo))%>">
-<% end %>
+  <strong>Photos:</strong><br>
+  <% if @maintenance_request.photos.attached? %>
+  <% @maintenance_request.photos.each do |photo| %>
+  <image class="mr_image" src="<%=(url_for(photo))%>">
+  <%= link_to 'Remove Image', delete_photo_attachment_maintenance_request_path(id: photo.id, request_id: @maintenance_request.id),
+            method: :delete,
+              data: { confirm: 'Are you sure?' } %><br></br>
+  <% end %>
+  <% end %>
 </p>
 
 <strong>Potential Contractors for the Job:</strong><br></br>
@@ -96,9 +101,11 @@
 </p>
 
 <p>
-  <strong>Photo:</strong><br>
-<% if @maintenance_request.photo.attached? %>
-  <image class="mr_image" src="<%=(url_for(@maintenance_request.photo))%>">
+  <strong>Photos:</strong><br>
+<% if @maintenance_request.photos.attached? %>
+  <% @maintenance_request.photos.each do |photo| %>
+  <image class="mr_image" src="<%=(url_for(photo))%>">
+  <% end %>
 <% end %>
 </p>
 

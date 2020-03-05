@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :bids
     resources :comments
     member do
+      delete :delete_photo_attachment
       patch :resolve
       put :resolve
       patch :contractor_resolve

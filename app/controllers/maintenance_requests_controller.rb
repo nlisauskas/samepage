@@ -87,8 +87,8 @@ class MaintenanceRequestsController < ApplicationController
   # PATCH/PUT /maintenance_requests/1
   # PATCH/PUT /maintenance_requests/1.json
   def update
-    if params[:photo]
-      @maintenance_request.attach(params[:photo])
+    if params[:maintenance_request][:photos]
+      @maintenance_request.photos.attach(params[:maintenance_request][:photos])
     end
     respond_to do |format|
       if @maintenance_request.update(maintenance_request_params)
@@ -111,6 +111,12 @@ class MaintenanceRequestsController < ApplicationController
     end
   end
 
+  def delete_photo_attachment
+    @photo = ActiveStorage::Attachment.find(params[:id])
+    @photo.purge
+    redirect_to maintenance_request_path(MaintenanceRequest.find_by_id(params[:request_id]))
+ end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_maintenance_request
@@ -126,6 +132,6 @@ class MaintenanceRequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def maintenance_request_params
-      params.require(:maintenance_request).permit(:category, :description, :title, :property_id, :tenant_id, :user_id, :contractor_id, :resolved, :photo, :contractor_resolved)
+      params.require(:maintenance_request).permit(:category, :description, :title, :property_id, :tenant_id, :user_id, :contractor_id, :resolved, :contractor_resolved, photos: [])
     end
 end
