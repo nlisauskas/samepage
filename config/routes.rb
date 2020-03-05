@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :password_resets
   resources :bids do
     patch :award
     put :award

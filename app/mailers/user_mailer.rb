@@ -94,4 +94,11 @@ class UserMailer < ApplicationMailer
      subject: 'Maintenance Request Completed')
  end
 
+ def forgot_password(user)
+  @user = user
+  @greeting = "Hi"
+
+  mail to: user.email, :subject => 'Reset password instructions'
+end
+
 end
