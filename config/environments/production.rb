@@ -60,7 +60,7 @@ Rails.application.configure do
     authentication:       'plain',
     enable_starttls_auto: true  }
   config.action_mailer.perform_deliveries = true
-    config.action_mailer.default_url_options = { :host => "samepageco.app" }
+    config.action_mailer.default_url_options = { :host => "samepagerealestate.herokuapp.com" }
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
