@@ -17,20 +17,25 @@ class PasswordResetsController < ApplicationController
   end
 
   def edit
-    if User.find_by_password_reset_token(params[:id])
-    @user = User.find_by_password_reset_token(params[:id])
-    else
-    @user = Contractor.find_by_password_reset_token(params[:id])
+    token = params[:id].to_s
+    if token.present?
+      if User.find_by_password_reset_token(token)
+      @user = User.find_by_password_reset_token(token)
+      else
+      @user = Contractor.find_by_password_reset_token(token)
+      end
     end
   end
 
   def update
-    if User.find_by_password_reset_token(params[:id])
-    @user = User.find_by_password_reset_token(params[:id])
+  token = params[:id].to_s
+  if token.present?
+    if User.find_by_password_reset_token(token)
+    @user = User.find_by_password_reset_token(token)
     else
-    @user = Contractor.find_by_password_reset_token(params[:id])
+    @user = Contractor.find_by_password_reset_token(token)
     end
-
+  end
   if @user.password_reset_sent_at < 2.hour.ago
     flash[:notice] = 'Password reset has expired'
     redirect_to new_password_reset_path
