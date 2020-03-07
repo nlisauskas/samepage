@@ -2,6 +2,7 @@ class Contractor < ApplicationRecord
   has_secure_password
   has_many :maintenance_requests
   has_many :bids
+  validates :email, uniqueness: true
 
   def send_password_reset
   generate_token(:password_reset_token)

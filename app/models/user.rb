@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :maintenance_requests
   has_many :contractors, through: :maintenance_requests
   has_many :bids, through: :maintenance_requests
+  validates :email, uniqueness: true
 
   def send_password_reset
   generate_token(:password_reset_token)
