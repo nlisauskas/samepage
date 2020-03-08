@@ -73,7 +73,7 @@
               fetch(`/payments/${event.currentTarget.dataset.id}/bid_award`)
               .then(response => response.json())
               .then((json) => {
-                var stripe = Stripe(<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>);
+                var stripe = Stripe('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>');
                 alert("In order to complete awarding this bid, you will be redirected to enter payment details. Your card will not be charged until the work is completed.");
                 stripe.redirectToCheckout({
                   sessionId: json.session_id
