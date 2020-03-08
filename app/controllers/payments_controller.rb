@@ -34,8 +34,8 @@ class PaymentsController < ApplicationController
           bid: @bid.id
         },
       client_reference_id: current_user.id,
-      success_url: "http://localhost:3000/maintenance_requests/#{@bid.maintenance_request.id}?session_id={CHECKOUT_SESSION_ID}",
-      cancel_url: 'http://localhost:3000/maintenance_requests',
+      success_url: "https://samepageco.app/maintenance_requests/#{@bid.maintenance_request.id}?session_id={CHECKOUT_SESSION_ID}",
+      cancel_url: 'https://samepageco.app/maintenance_requests',
     )
 
     render json: { session_id: session.id }
