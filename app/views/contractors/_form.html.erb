@@ -28,7 +28,16 @@
 
   <div class="field">
     <%= form.label :occupation %><br>
-    <%= form.select :occupation, ['Landscaper', 'Plumber', 'HVAC', 'Electrician', 'Locksmith', 'Flooring Specialist', 'Window Expert', 'Pest Control', 'General Contractor', 'Painter', 'Handyman'], required: true, class: "form-control"%>
+    <label><%= check_box_tag 'contractor[occupation][]', 'Landscaper',false %> Landscaper</label><br>
+    <label><%= check_box_tag 'contractor[occupation][]', 'Plumber',false %> Plumber</label><br>
+    <label><%= check_box_tag 'contractor[occupation][]', 'HVAC',false %> HVAC</label><br>
+    <label><%= check_box_tag 'contractor[occupation][]', 'Electrician',false %> Electrician</label><br>
+    <label><%= check_box_tag 'contractor[occupation][]', 'Flooring Specialist',false %> Flooring Specialist</label><br>
+    <label><%= check_box_tag 'contractor[occupation][]', 'Window Expert',false %> Window Expert</label><br>
+    <label><%= check_box_tag 'contractor[occupation][]', 'Pest Control',false %> Pest Control</label><br>
+    <label><%= check_box_tag 'contractor[occupation][]', 'General Contractor',false %> General Contractor</label><br>
+    <label><%= check_box_tag 'contractor[occupation][]', 'Painter',false %> Painter</label><br>
+    <label><%= check_box_tag 'contractor[occupation][]', 'Handyman',false %> Handyman</label><br>
   </div><br>
 
   <div class="field">

@@ -28,7 +28,7 @@ class ContractorsController < ApplicationController
   def create
     params
     @contractor = Contractor.new(contractor_params)
-
+    binding.pry
     respond_to do |format|
       if @contractor.save
         session[:contractor_id] = @contractor.id
@@ -88,6 +88,6 @@ class ContractorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contractor_params
-      params.require(:contractor).permit(:first_name, :last_name, :company, :email, :password, :password_confirmation, :maintenance_request_id, :phone, :occupation, :stripe_uid)
+      params.require(:contractor).permit(:first_name, :last_name, :company, :email, :password, :password_confirmation, :maintenance_request_id, :phone, :stripe_uid, occupation: [])
     end
 end
